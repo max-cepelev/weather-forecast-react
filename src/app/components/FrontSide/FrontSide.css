@@ -9,39 +9,75 @@
     padding: 15px 25px;
 }
 
-.card.is-clear-day {
+.card.is-01d {
     background: linear-gradient(160deg, rgba(247,183,51,1) 0%, rgba(252,74,26,1) 100%);
 }
 
-.card.is-clear-night {
+.card.is-01n {
     background: linear-gradient(18deg, rgba(182,136,252,1) 0%, rgba(73,43,176,1) 100%); 
 }
 
-.card.is-rain {
+/* is-rain */
+.card.is-10d { 
+    background: linear-gradient(18deg, rgba(0,110,213,1) 0%, rgba(162,171,177,1) 74%); 
+}
+.card.is-10n { 
+    background: linear-gradient(18deg, rgba(0,110,213,1) 0%, rgba(162,171,177,1) 74%); 
+}
+/* is-sleet */
+.card.is-09d {
+    background: linear-gradient(18deg, rgba(0,110,213,1) 0%, rgba(162,171,177,1) 74%); 
+}
+.card.is-09n {
     background: linear-gradient(18deg, rgba(0,110,213,1) 0%, rgba(162,171,177,1) 74%); 
 }
 
-.card.is-sleet {
-    background: linear-gradient(18deg, rgba(0,110,213,1) 0%, rgba(162,171,177,1) 74%); 
+/* is-broken */
+.card.is-04d {
+    background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
+}
+.card.is-04n {
+    background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
 }
 
-.card.is-snow {
+/* is-thunderstorm */
+.card.is-11d {
+    background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
+}
+.card.is-11n {
+    background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
+}
+
+/* is-snow */
+.card.is-13d {
     background: linear-gradient(18deg, rgba(0,175,245,1) 0%, rgba(0,223,247,1) 74%); 
 }
-
-.card.is-fog {
+.card.is-13n {
+    background: linear-gradient(18deg, rgba(0,175,245,1) 0%, rgba(0,223,247,1) 74%); 
+}
+/* is-fog */
+.card.is-50d {
+    background: linear-gradient(18deg, rgba(148,190,195,1) 0%, rgba(135,192,228,1) 74%); 
+}
+.card.is-50n {
     background: linear-gradient(18deg, rgba(148,190,195,1) 0%, rgba(135,192,228,1) 74%); 
 }
 
-.card.is-cloudy {
+/* is-cloudy */
+.card.is-03d {
+    background: linear-gradient(18deg, rgba(63,174,187,1) 0%, rgba(0,157,255,1) 100%); 
+}
+.card.is-03n {
     background: linear-gradient(18deg, rgba(63,174,187,1) 0%, rgba(0,157,255,1) 100%); 
 }
 
-.card.is-partly-cloudy-day {
+/* is-partly-cloudy-day */
+.card.is-02d {
     background: linear-gradient(18deg, rgba(0,190,254,1) 17%, rgba(255,190,0,1) 100%); 
 }
 
-.card.is-partly-cloudy-night {
+/* is-partly-cloudy-night */
+.card.is-02n {
     background: linear-gradient(18deg, rgba(121,0,254,1) 17%, rgba(136,203,251,1) 100%); 
 }
 

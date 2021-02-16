@@ -1,25 +1,38 @@
+import { Component } from 'react';
 import FrontSide from './components/FrontSide/FrontSide';
-import moment from 'moment';
+import BackSide from './components/BackSide/BackSide';
 import './panel.css';
-import cities from '../city.list.min.json'
+import cities from './components/city.list.min.json';
 
-function App() {
-  return (
-    <div className="panel">
-      <div className='panel-front'>
-        <FrontSide
-          date={moment()}
-          icon="default"
-          temperature={19}
-          apparentTemperature={15}
-          summary='Sunny'
-          currentCityName="Stockholm"
-          cities={cities}
-        />
+class App extends Component {
+
+  state = {flipped: true, currentCity: cities[0]};
+
+  onFlip = () => {
+    this.setState({flipped: !this.state.flipped});
+  }
+
+
+  render() {
+    return (
+      <div className={`panel ${this.state.flipped ? 'flip' : ''}`}>
+        <div className='panel-front'>
+          <FrontSide 
+            onClick={this.onFlip}
+            city={this.state.currentCity}
+            lang='en'
+            units = 'metric'/>
+        </div>
+        <div className='panel-back'>
+          <BackSide
+            cities={cities}
+            onClick={this.onFlip}
+            currentCity={this.state.currentCity}
+          />
+        </div>
       </div>
-      <div className='panel-back'>Panel Back</div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
