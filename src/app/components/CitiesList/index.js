@@ -8,6 +8,7 @@ const CitiesList = ({cities, currentCity, onSelect}) => {
             {cities.map(city => {
                 return (
                     <CityItem 
+                        key={city.id}
                         isSelected={currentCity.name === city.name} 
                         city={city}
                         onSelect={onSelect}

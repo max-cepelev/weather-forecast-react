@@ -9,7 +9,8 @@ export default class FrontSide extends Component {
     state = {currentWeather: null, prevCityId: null}
     udateWether = () => {
         const   {currentCity, lang, units} = this.props;
-        getResource(`https://api.openweathermap.org/data/2.5/weather?id=${currentCity.id}&appid=fcf8724495fdc0ffd44f1c13dde3b8df&lang=${lang}&units=${units}`).then(weather => {
+        const city = localStorage.getItem('cityId') ? localStorage.getItem('cityId') : currentCity.id;
+        getResource(`https://api.openweathermap.org/data/2.5/weather?id=${city}&appid=fcf8724495fdc0ffd44f1c13dde3b8df&lang=${lang}&units=${units}`).then(weather => {
             this.setState({currentWeather: weather});
             console.log(weather);
         });
