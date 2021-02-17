@@ -1,14 +1,16 @@
 import React from 'react';
-import CitiesList from './CitiesList';
+import CitiesList from '../CitiesList';
+import './button.css';
 
-const BackSide = ({onClick, cities, currentCity}) => {
+const BackSide = ({onClick, cities, currentCity, onSelect}) => {
     return (
-        <div>
+        <div className='card-back' >
             <CitiesList
                 cities={cities}
                 currentCity={currentCity}
+                onSelect={onSelect}
             />
-            <button onClick={onClick} >Flip back</button>
+            <button className='button' onClick={onClick} >Flip back</button>
         </div>
 
     );

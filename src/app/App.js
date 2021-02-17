@@ -1,15 +1,19 @@
 import { Component } from 'react';
-import FrontSide from './components/FrontSide/FrontSide';
+import FrontSide from './components/FrontSide';
 import BackSide from './components/BackSide/BackSide';
 import './panel.css';
 import cities from './components/city.list.min.json';
 
 class App extends Component {
 
-  state = {flipped: true, currentCity: cities[0]};
+  state = {flipped: false, currentCity: cities[1]};
 
   onFlip = () => {
     this.setState({flipped: !this.state.flipped});
+  }
+
+  onSelectCity = (city) => {
+    this.setState({currentCity: city});
   }
 
 
@@ -19,8 +23,8 @@ class App extends Component {
         <div className='panel-front'>
           <FrontSide 
             onClick={this.onFlip}
-            city={this.state.currentCity}
-            lang='en'
+            currentCity={this.state.currentCity}
+            lang='ru'
             units = 'metric'/>
         </div>
         <div className='panel-back'>
@@ -28,6 +32,7 @@ class App extends Component {
             cities={cities}
             onClick={this.onFlip}
             currentCity={this.state.currentCity}
+            onSelect={this.onSelectCity}
           />
         </div>
       </div>

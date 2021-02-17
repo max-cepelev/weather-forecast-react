@@ -6,14 +6,34 @@ import {getResource} from '../services/api';
 
 export default class FrontSide extends Component {
 
-    state = {currentWeather: null}
-
-    componentDidMount() {
-        const   {city, lang, units} = this.props;
-        getResource(`https://api.openweathermap.org/data/2.5/weather?id=${city.id}&appid=fcf8724495fdc0ffd44f1c13dde3b8df&lang=${lang}&units=${units}`).then(weather => {
+    state = {currentWeather: null, prevCityId: null}
+    udateWether = () => {
+        const   {currentCity, lang, units} = this.props;
+        getResource(`https://api.openweathermap.org/data/2.5/weather?id=${currentCity.id}&appid=fcf8724495fdc0ffd44f1c13dde3b8df&lang=${lang}&units=${units}`).then(weather => {
             this.setState({currentWeather: weather});
             console.log(weather);
         });
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.currentCity.id !== prevState.prevCityId) {
+            return {
+                prevCityId: nextProps.currentCity.id, 
+                currentWeather: null
+            }
+        }
+        return null;
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.currentWeather) {
+            return null;
+        }
+        this.udateWether();
+    }
+
+    componentDidMount() {
+        this.udateWether();
     }
 
     render() {
