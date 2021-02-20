@@ -3,6 +3,8 @@ import FrontSideView from './FrontSideView';
 import moment from 'moment';
 import {getResource} from '../services/api';
 
+const myTime = new Date();
+console.log(myTime);
 
 export default class FrontSide extends Component {
 
@@ -10,9 +12,8 @@ export default class FrontSide extends Component {
     udateWether = () => {
         const   {currentCity, lang, units} = this.props;
         const city = localStorage.getItem('cityId') ? localStorage.getItem('cityId') : currentCity.id;
-        getResource(`https://api.openweathermap.org/data/2.5/weather?id=${city}&appid=fcf8724495fdc0ffd44f1c13dde3b8df&lang=${lang}&units=${units}`).then(weather => {
+        getResource(`https://api.openweathermap.org/data/2.5/forecast?id=${city}&appid=fcf8724495fdc0ffd44f1c13dde3b8df&lang=${lang}&units=${units}`).then(weather => {
             this.setState({currentWeather: weather});
-            console.log(weather);
         });
     }
 
@@ -41,9 +42,9 @@ export default class FrontSide extends Component {
         if (!this.state.currentWeather) {
             return null;
         }
-        const {name} = this.state.currentWeather;
-        const {temp, feels_like} = this.state.currentWeather.main;
-        const {icon, description} = this.state.currentWeather.weather[0];
+        const {name} = this.state.currentWeather.city;
+        const {temp, feels_like} = this.state.currentWeather.list[0].main;
+        const {icon, description} = this.state.currentWeather.list[0].weather[0];
 
         return (
             <FrontSideView

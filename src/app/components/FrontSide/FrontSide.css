@@ -87,7 +87,6 @@
 
 .card-day {
     font-size: 32px;
-    margin-bottom: 40px;
     text-align: left;
 }
 
@@ -98,15 +97,14 @@
 
 .card-temperature {
     font-size: 36px;
-    margin-top: 25px;
     text-align: left;
 }
 
 .card-row {
     align-items: baseline;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
 }
 
@@ -114,9 +112,16 @@
     font-size: 22px;
 }
 
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: clamp(50px, 10vh, 70px);
+}
+
 .card-city {
     font-size: 36px;
-    margin-top: 8px;
     text-align: left;
 }
 

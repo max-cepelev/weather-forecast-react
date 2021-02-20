@@ -7,7 +7,9 @@ import cities from './components/city.list.min.json';
 class App extends Component {
 
 
-  state = {flipped: false, currentCity: localStorage.getItem('cityId') ? cities.find(e=>e.id === +localStorage.getItem('cityId')) : cities[1]};
+  state = {
+    flipped: false, 
+    currentCity: localStorage.getItem('cityId') ? cities.find(e=>e.id === +localStorage.getItem('cityId')) : cities[1]};
 
   onFlip = () => {
     this.setState({flipped: !this.state.flipped});
@@ -19,7 +21,6 @@ class App extends Component {
 
 
   render() {
-    console.log(this.state.currentCity);
     return (
       <div className={`panel ${this.state.flipped ? 'flip' : ''}`}>
         <div className='panel-front'>

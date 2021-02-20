@@ -21,12 +21,14 @@ const FrontSide = ({date, icon, temperature, summary, apparentTemperature, curre
                 </div>
                 <div className='card-weather'>{summary}</div>
             </div>
-            <div className="card-line"></div>
-            <div className="card-row">
-                <div className='card-city'>{currentCityName}</div>
-                <button className='card-options' onClick={onClick}>
-                    <img src={optionsImage} alt="options" width={32}/>
-                </button>
+            <div className='card-footer'>
+                <div className="card-line"></div>
+                <div className="card-row">
+                    <div className='card-city'>{currentCityName}</div>
+                    <button className='card-options' onClick={onClick}>
+                        <img src={optionsImage} alt="options" width={32}/>
+                    </button>
+                </div>
             </div>
         </div>
     );
