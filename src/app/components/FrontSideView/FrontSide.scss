@@ -1,12 +1,87 @@
 .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template: 30px 1fr 1fr 1fr 1fr 110px 60px / 100%;
+    justify-items: center;
     align-items: center;
     background: linear-gradient(160deg, rgba(136,209,252,1) 0%, rgba(84,69,253,1) 100%);
     border-radius: 8px;
     height: 100%;
     padding: 15px 25px;
+    &-day {
+        font-size: 24px;
+        text-align: left;
+    }
+    &-line {
+        border-bottom: 3.5px solid #fff;
+        width: 100%;
+    }
+    &-temperature {
+        margin-top: 7vh;
+        font-size: 80px;
+        text-align: left;
+        display: flex;
+        align-items: center;
+    }
+    &-row {
+        align-items: baseline;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    &-temperature .small {
+        font-size: 22px;
+    }
+    &-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 3.5px solid #fff;
+        width: 100%;
+        padding-top: 12px;
+    }
+    &-city {
+        font-size: 24px;
+        text-align: left;
+    }
+    &-options {
+        background: none;
+        border: none;
+        outline: none;
+    }
+    &-weather {
+        font-size: 26px;
+        margin: 0 auto;
+    }
+    &-back {
+        background: #fff;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+        padding: 20px;
+        width: 100%;
+    }
+    &-list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    &-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100px;
+    }
+    &-select {
+        width: 50%;
+        cursor: pointer;
+        &.active {
+            border: 1px solid;
+        }
+    }
     &.is-01d {
         background: linear-gradient(160deg, rgba(247,183,51,1) 0%, rgba(252,74,26,1) 100%);
     }
@@ -27,123 +102,50 @@
     &.is-09n {
         background: linear-gradient(18deg, rgba(0,110,213,1) 0%, rgba(162,171,177,1) 74%); 
     }
-
-}
-/* is-broken */
-.card.is-04d {
-    background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
-}
-.card.is-04n {
-    background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
-}
-
-/* is-thunderstorm */
-.card.is-11d {
-    background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
-}
-.card.is-11n {
-    background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
-}
-
-/* is-snow */
-.card.is-13d {
-    background: linear-gradient(18deg, rgba(0,175,245,1) 0%, rgba(0,223,247,1) 74%); 
-}
-.card.is-13n {
-    background: linear-gradient(18deg, rgba(0,175,245,1) 0%, rgba(0,223,247,1) 74%); 
-}
-/* is-fog */
-.card.is-50d {
-    background: linear-gradient(18deg, rgba(148,190,195,1) 0%, rgba(135,192,228,1) 74%); 
-}
-.card.is-50n {
-    background: linear-gradient(18deg, rgba(148,190,195,1) 0%, rgba(135,192,228,1) 74%); 
-}
-
-/* is-cloudy */
-.card.is-03d {
-    background: linear-gradient(18deg, rgba(63,174,187,1) 0%, rgba(0,157,255,1) 100%); 
-}
-.card.is-03n {
-    background: linear-gradient(18deg, rgba(63,174,187,1) 0%, rgba(0,157,255,1) 100%); 
-}
-
-/* is-partly-cloudy-day */
-.card.is-02d {
-    background: linear-gradient(18deg, rgba(0,190,254,1) 17%, rgba(255,190,0,1) 100%); 
-}
-
-/* is-partly-cloudy-night */
-.card.is-02n {
-    background: linear-gradient(18deg, rgba(121,0,254,1) 17%, rgba(136,203,251,1) 100%); 
-}
-
-.card.is-default {
-    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%); 
-}
-
-.card-day {
-    font-size: 24px;
-    text-align: left;
-}
-
-.card-line {
-    border-bottom: 3.5px solid #fff;
-    width: 100%;
-}
-
-.card-temperature {
-    font-size: 36px;
-    text-align: left;
-}
-
-.card-row {
-    align-items: baseline;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.card-temperature .small {
-    font-size: 22px;
-}
-
-.card-footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    height: clamp(50px, 10vh, 70px);
-}
-
-.card-city {
-    font-size: 28px;
-    text-align: left;
-}
-
-.card-options {
-    background: none;
-    border: none;
-    outline: none;
-}
-
-.card-weather {
-    font-size: 30px;
-    margin: 0;
-}
-
-.card-back {
-    background: #fff;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-    padding: 20px;
-    width: 100%;
-}
-
-.card-list {
-    display: flex;
+    /* is-broken */
+    &.is-04d {
+        background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
+    }
+    &.is-04n {
+        background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
+    }
+    /* is-thunderstorm */
+    &.is-11d {
+        background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
+    }
+    &.is-11n {
+        background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
+    }
+    /* is-snow */
+    &.is-13d {
+        background: linear-gradient(18deg, rgba(0,175,245,1) 0%, rgba(0,223,247,1) 74%); 
+    }
+    &.is-13n {
+        background: linear-gradient(18deg, rgba(0,175,245,1) 0%, rgba(0,223,247,1) 74%); 
+    }
+    /* is-fog */
+    &.is-50d {
+        background: linear-gradient(18deg, rgba(148,190,195,1) 0%, rgba(135,192,228,1) 74%); 
+    }
+    &.is-50n {
+        background: linear-gradient(18deg, rgba(148,190,195,1) 0%, rgba(135,192,228,1) 74%); 
+    }
+    /* is-cloudy */
+    &.is-03d {
+        background: linear-gradient(18deg, rgba(63,174,187,1) 0%, rgba(0,157,255,1) 100%); 
+    }
+    &.is-03n {
+        background: linear-gradient(18deg, rgba(63,174,187,1) 0%, rgba(0,157,255,1) 100%); 
+    }
+    /* is-partly-cloudy-day */
+    &.is-02d {
+        background: linear-gradient(18deg, rgba(0,190,254,1) 17%, rgba(255,190,0,1) 100%); 
+    }
+    /* is-partly-cloudy-night */
+    &.is-02n {
+        background: linear-gradient(18deg, rgba(121,0,254,1) 17%, rgba(136,203,251,1) 100%); 
+    }
+    &.is-default {
+        background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%); 
+    }
 }

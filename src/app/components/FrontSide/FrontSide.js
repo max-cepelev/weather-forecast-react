@@ -5,13 +5,44 @@ import {getResource} from '../services/api';
 
 export default class FrontSide extends Component {
 
-    state = {currentWeather: null, prevCity: null};
+    state = {currentWeather: null, prevCity: null, weatherList: null};
 
     updateWeather = () => {
         const {currentCity, units, currentLang} = this.props;
         const {lon, lat} = currentCity;
         getResource(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=fcf8724495fdc0ffd44f1c13dde3b8df&lang=${currentLang}&units=${units}`)
-            .then(weather => {this.setState({currentWeather: weather})});
+            .then(weather => {
+                const hourly = [];
+                for (let n = 2; n < 16; n+=3) {
+                    hourly.push(weather.hourly[n]);
+                }
+                this.setState({
+                    currentWeather: weather,
+                    weatherList: hourly
+                })
+            });
+    }
+
+    onDaily = () => {
+        const daily = [];
+        // погода на 5 дней
+        for (let i = 0; i < 5; i++) {
+            daily.push(this.state.currentWeather.daily[i]);
+        }
+        this.setState({
+            weatherList: daily
+        })
+    }
+
+    onHourly = () => {
+        const hourly = [];
+        // погода на ближайшие 15 часов, показывает каждые 3 часа
+        for (let n = 2; n < 16; n+=3) {
+            hourly.push(this.state.currentWeather.hourly[n]);
+        }
+        this.setState({
+            weatherList: hourly
+        })
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -43,27 +74,17 @@ export default class FrontSide extends Component {
         if (!this.state.currentWeather) {
             return null;
         };
-        console.log(this.state.currentWeather);
-        this.state.currentWeather.daily.forEach(data => {
-            console.log(new Date(data.dt * 1000));
-        })
+
         const {city} = this.props.currentCity;
-        const {temp, feels_like, dt} = this.state.currentWeather.current;
-        const {icon, description} = this.state.currentWeather.current.weather[0];
-        const day = new Date(dt * 1000).toLocaleString(`${this.props.currentLang}`, {weekday: 'long'});
-        const date = new Date(dt * 1000).toLocaleString(`${this.props.currentLang}`, {day: 'numeric', month: 'long'});
-        const daily = this.state.currentWeather.daily;
 
         return (
             <FrontSideView
-                day={day}
-                date={date}
-                icon={icon}
-                temperature={temp}
-                apparentTemperature={feels_like}
-                summary={description}
+                currentLang={this.props.currentLang}
+                currentWeather={this.state.currentWeather.current}
                 currentCityName={city}
-                daily={daily}
+                weatherList={this.state.weatherList}
+                onDaily={this.onDaily}
+                onHourly={this.onHourly}
             />
         );
     }
