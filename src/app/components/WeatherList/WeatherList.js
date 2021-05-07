@@ -1,13 +1,18 @@
 import React from 'react';
 import WeatherIcon from '../WeatherIcon';
 
-const WeatherList = ({weatherList}) => {
+const WeatherList = ({weatherList, getNewDate}) => {
+    
+    const getWeekDay = (date) => {
+        let days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+        return days[date.getDay()];
+    }
 
     if (weatherList[0].temp.day) {
         return (
             weatherList.map(item =>
                     <div key={item.dt} className='card-item'>
-                        <div className="title">{new Date(item.dt * 1000).toLocaleString('ru', {day: 'numeric', month: 'numeric'})}</div>
+                        <div className="title">{`${getWeekDay(getNewDate(item.dt))}, ${getNewDate(item.dt).getDate()}`}</div>
                         <WeatherIcon icon={item.weather[0].icon} width='40px'/>
                         <div className=''>
                             {`${parseInt(item.temp.max)}°`}
@@ -22,7 +27,7 @@ const WeatherList = ({weatherList}) => {
         return (
             weatherList.map(item =>
                     <div key={item.dt} className='card-item'>
-                        <div className="title">{new Date(item.dt * 1000).toLocaleString('ru', {hour: 'numeric', minute: 'numeric'})}</div>
+                        <div className="title">{getNewDate(item.dt).toLocaleString('ru', {hour: 'numeric', minute: 'numeric'})}</div>
                         <WeatherIcon icon={item.weather[0].icon} width='40px'/>
                         <div className=''>
                             {`${parseInt(item.temp)}°`}

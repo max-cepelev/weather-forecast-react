@@ -23,7 +23,6 @@
         align-items: center;
     }
     &-row {
-        align-items: baseline;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -78,8 +77,10 @@
     &-select {
         width: 50%;
         cursor: pointer;
+        height: 40px;
         &.active {
-            border: 1px solid;
+            border: 2px solid #FFFFFF;
+            border-radius: 40px;
         }
     }
     &.is-01d {
@@ -147,5 +148,31 @@
     }
     &.is-default {
         background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%); 
+    }
+}
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    &-container {
+        width: 90%;
+        position: relative;
+    }
+    &-text {
+        width: 100%;
+    }
+    &-dropdown-menu {
+        position: absolute;
+        top: 25px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+    }
+    &-item {
+        color: black;
+        cursor: pointer;
+        list-style-type: none;
+        margin-top: 5px;
     }
 }

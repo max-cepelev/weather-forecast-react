@@ -1,16 +1,21 @@
 import React, {Component} from 'react';
 import FrontSideView from '../FrontSideView';
-import {getResource} from '../services/api';
+import {getWeather} from '../services/api';
 
 
 export default class FrontSide extends Component {
 
-    state = {currentWeather: null, prevCity: null, weatherList: null};
+    state = {
+        currentWeather: null, 
+        prevCity: null, 
+        weatherList: null,
+        activeButton: "hourly"
+    };
 
     updateWeather = () => {
         const {currentCity, units, currentLang} = this.props;
         const {lon, lat} = currentCity;
-        getResource(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=fcf8724495fdc0ffd44f1c13dde3b8df&lang=${currentLang}&units=${units}`)
+        getWeather(lat, lon, currentLang, units)
             .then(weather => {
                 const hourly = [];
                 for (let n = 2; n < 16; n+=3) {
@@ -30,7 +35,8 @@ export default class FrontSide extends Component {
             daily.push(this.state.currentWeather.daily[i]);
         }
         this.setState({
-            weatherList: daily
+            weatherList: daily,
+            activeButton: "daily"
         })
     }
 
@@ -41,14 +47,15 @@ export default class FrontSide extends Component {
             hourly.push(this.state.currentWeather.hourly[n]);
         }
         this.setState({
-            weatherList: hourly
+            weatherList: hourly,
+            activeButton: "hourly"
         })
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.currentCity.city !== prevState.prevCity) {
+        if (nextProps.currentCity.id !== prevState.prevCity) {
             return {
-                prevCity: nextProps.currentCity.city,
+                prevCity: nextProps.currentCity.id,
                 currentWeather: null
             }
         }
@@ -75,14 +82,16 @@ export default class FrontSide extends Component {
             return null;
         };
 
-        const {city} = this.props.currentCity;
+        const {name} = this.props.currentCity;
 
         return (
             <FrontSideView
                 currentLang={this.props.currentLang}
                 currentWeather={this.state.currentWeather.current}
-                currentCityName={city}
+                currentCityName={name}
+                onClick={this.props.onClick}
                 weatherList={this.state.weatherList}
+                activeButton={this.state.activeButton}
                 onDaily={this.onDaily}
                 onHourly={this.onHourly}
             />

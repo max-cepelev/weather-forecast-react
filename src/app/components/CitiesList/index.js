@@ -2,10 +2,10 @@ import React from 'react';
 import './list.css';
 import CityItem from './CityItem';
 
-const CitiesList = ({cities, currentCity, onSelect}) => {
+const CitiesList = ({citiesList, currentCity, onSelect}) => {
     return (
         <ul className='list'>
-            {cities.map(city => {
+            {citiesList.map(city => {
                 return (
                     <CityItem 
                         key={city.id}
