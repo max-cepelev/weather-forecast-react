@@ -13,13 +13,19 @@ const makeId = () => {
   }
   return ID;
 }
+
+const getLocalStorage = (name, ifErrorValue) => {
+  let data = JSON.parse(localStorage.getItem(name));
+  if (data == null) data = ifErrorValue;
+  return data;
+}
 class App extends Component {
 
   state = {
     flipped: false,
     currentLang: 'ru',
-    currentCity: JSON.parse(localStorage.getItem("currentLocation")),
-    citiesList: JSON.parse(localStorage.getItem("citiesList")) !== null ? JSON.parse(localStorage.getItem("citiesList")) : []
+    currentCity: localStorage.getItem("currentCity") !== null ? getLocalStorage("currentCity", {}) : getLocalStorage("currentLocation", {}),
+    citiesList: getLocalStorage("citiesList", [])
   };
 
   onAddCity = (city) => {
@@ -27,9 +33,13 @@ class App extends Component {
     const name = local_names.ru;
     const id = makeId();
     const citiesList = this.state.citiesList;
-    citiesList.push({id, lat, lon, name});
-    this.setState({citiesList: citiesList})
-    localStorage.setItem("citiesList", JSON.stringify(citiesList));
+    if (!citiesList.find(item => item.name === name)) {
+      citiesList.push({id, name, lat, lon});
+      this.setState({citiesList: citiesList});
+      localStorage.setItem("citiesList", JSON.stringify(citiesList));
+    } else {
+      return
+    }
   }
 
   onFlip = () => {
@@ -48,8 +58,28 @@ class App extends Component {
   onGetLocation = () => {
     getLocation(this.state.currentLang)
       .then(data => {
-        localStorage.setItem("currentLocation", JSON.stringify({name: data.city, lon: data.lon, lat: data.lat}));
+        const id = makeId();
+        const {city, lon, lat} = data;
+        if (this.state.currentCity.name !== city) {
+          localStorage.setItem("currentLocation", JSON.stringify({id: id, name: city, lon: lon, lat: lat}));
+        }
+        
       })
+  }
+
+  onDelete = (id, citiesList) => {
+    const index = citiesList.findIndex(elem => elem.id === id)
+
+    const before = citiesList.slice(0, index);
+    const after = citiesList.slice(index + 1);
+
+    const newArr = [...before, ...after];
+
+    localStorage.setItem("citiesList", JSON.stringify(newArr));
+
+    this.setState({
+      citiesList: newArr
+    })
   }
 
   render() {
@@ -71,7 +101,9 @@ class App extends Component {
             onClickLang={this.onSelectLang}
             currentCity={this.state.currentCity}
             onSelect={this.onSelectCity}
+            onDelete={this.onDelete}
             onAddCity={this.onAddCity}
+            getLocalStorage={getLocalStorage}
           />
         </div>
       </div>

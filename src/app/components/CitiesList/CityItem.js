@@ -4,17 +4,17 @@ export default class CityItem extends Component {
     onClick = () => {
         const {onSelect, city} = this.props;
         onSelect(city);
-        localStorage.setItem('cityId', city.id);
+        localStorage.setItem('currentCity', JSON.stringify(city));
     }
     render() {
-        const {city, isSelected} = this.props;
+        const {city, isSelected, onDelete} = this.props;
         return (
             <li
-                onClick={this.onClick}
                 key={city.id}
-                className={`list-item ${
-                    isSelected ? 'is-selected' : ''}`}>
-                    {city.name}
-            </li>);
+                className={`list-item ${isSelected ? 'is-selected' : ''}`}>
+                    <p onClick={this.onClick}>{city.name}</p>
+                    <div className="list-delete" onClick={onDelete}><img src="icons/delete.svg" alt="delete"/></div>
+            </li>
+        );
     }
 }

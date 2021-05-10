@@ -16,7 +16,7 @@ const getWeather = async (lat, lon, currentLang, units) => {
     return res;
 }
 const getCity = async (cityName) => {
-    const res = await getResource(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName},ru&limit=5&appid=${keyAPI}`);
+    const res = await getResource(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${keyAPI}`);
     return res;
 }
 const getLocation = async (currentLang) => {

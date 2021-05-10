@@ -1,9 +1,9 @@
 import React from 'react';
 
-const CitySearchResult = ({city, addCity}) => {
+const CitySearchResult = ({city, onClick}) => {
     return (
         <li className="search-item"
-            onClick={addCity}>
+            onClick={onClick}>
             {city.local_names.ru}
         </li>
     )

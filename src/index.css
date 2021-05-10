@@ -30,3 +30,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.flexfont24 {
+  font-size: clamp(19px, 3.5vw , 24px);
+}

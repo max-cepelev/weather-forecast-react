@@ -23,24 +23,24 @@ const FrontSideView = ({currentLang, currentWeather, currentCityName, onClick, w
     return (
         <div className={`card is-${icon}`}>
             <div className='card-row'>
-                <div className='card-day'>{ucFirst(day)}</div>
-                <div className='card-day'>{date}</div>
+                <div className='card-day flexfont24'>{ucFirst(day)}</div>
+                <div className='card-day flexfont24'>{date}</div>
             </div>
             <div className='card-temperature'>
                     {`${parseInt(temp)}°`}
                     <WeatherIcon icon={icon} width='80px'/>
             </div>
             <div className='card-weather'>{ucFirst(description)}</div>
-            <div className="small">{`Ощущается как: ${parseInt(feels_like)}°`}</div>
+            <div className="small">{`Ощущается как ${parseInt(feels_like)}°`}</div>
             <div className="card-row">
                 <div className={`card-select ${activeButton === "hourly" && "active"}`} onClick={onHourly}>По часам</div>
                 <div className={`card-select ${activeButton === "daily" && "active"}`} onClick={onDaily}>По дням</div>
             </div>
-            <div className="card-list">
+            <div className="card-row">
                 <WeatherList weatherList={weatherList} getNewDate={getNewDate}/>
             </div>
-            <div className='card-footer'>
-                <div className='card-city'>{currentCityName}</div>
+            <div className='card-row card-footer'>
+                <h1 className='card-city flexfont24'>{currentCityName}</h1>
                 <button className='card-options' onClick={onClick}>
                     <img src={optionsImage} alt="options" width={32}/>
                 </button>

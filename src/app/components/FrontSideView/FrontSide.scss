@@ -1,14 +1,13 @@
 .card {
-    display: grid;
-    grid-template: 30px 1fr 1fr 1fr 1fr 110px 60px / 100%;
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     background: linear-gradient(160deg, rgba(136,209,252,1) 0%, rgba(84,69,253,1) 100%);
     border-radius: 8px;
     height: 100%;
     padding: 15px 25px;
     &-day {
-        font-size: 24px;
         text-align: left;
     }
     &-line {
@@ -16,7 +15,7 @@
         width: 100%;
     }
     &-temperature {
-        margin-top: 7vh;
+        margin-top: 5vh;
         font-size: 80px;
         text-align: left;
         display: flex;
@@ -32,16 +31,12 @@
         font-size: 22px;
     }
     &-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         border-top: 3.5px solid #fff;
-        width: 100%;
         padding-top: 12px;
     }
     &-city {
-        font-size: 24px;
         text-align: left;
+        margin: 0;
     }
     &-options {
         background: none;
@@ -62,12 +57,6 @@
         padding: 20px;
         width: 100%;
     }
-    &-list {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
     &-item {
         display: flex;
         flex-direction: column;
@@ -76,11 +65,12 @@
     }
     &-select {
         width: 50%;
+        padding-top: 10px;
         cursor: pointer;
         height: 40px;
+        align-self: center;
         &.active {
-            border: 2px solid #FFFFFF;
-            border-radius: 40px;
+            border-bottom: 2px solid #FFFFFF;
         }
     }
     &.is-01d {
@@ -148,31 +138,5 @@
     }
     &.is-default {
         background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%); 
-    }
-}
-.search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 50px;
-    &-container {
-        width: 90%;
-        position: relative;
-    }
-    &-text {
-        width: 100%;
-    }
-    &-dropdown-menu {
-        position: absolute;
-        top: 25px;
-        width: 100%;
-        margin: 0 auto;
-        padding: 0;
-    }
-    &-item {
-        color: black;
-        cursor: pointer;
-        list-style-type: none;
-        margin-top: 5px;
     }
 }

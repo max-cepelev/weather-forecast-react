@@ -5,18 +5,22 @@ import './button.css';
 
 
 
-const BackSide = ({onClick, citiesList, currentCity, onSelect, onClickLang, onAddCity}) => {
+const BackSide = ({onClick, citiesList, currentCity, onSelect, onClickLang, onAddCity, getLocalStorage, onDelete}) => {
     
     return (
-        <div className='card-back' >
-            <button className='button-lang' onClick={onClickLang}>lang</button>
-            <CitiesList
-                citiesList={citiesList}
-                currentCity={currentCity}
-                onSelect={onSelect}
-            />
-            <CitySearch addCity={onAddCity}/>
-            <button className='button' onClick={onClick} >Flip back</button>
+        <div className='card-back'>
+            <div>
+                {/* <button className='button-lang' onClick={onClickLang}>lang</button> */}
+                <CitiesList
+                    citiesList={citiesList}
+                    currentCity={currentCity}
+                    onSelect={onSelect}
+                    getLocalStorage={getLocalStorage}
+                    onDelete={onDelete}
+                />
+                <CitySearch addCity={onAddCity}/>
+            </div>
+            <button className='button' onClick={onClick} >Назад</button>
         </div>
     );
 };

@@ -1,0 +1,60 @@
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 20px;
+    &-container {
+        width: 90%;
+        position: relative;
+    }
+    &-text {
+        padding: 10px;
+        border-radius: 10px 0px 0px 10px;
+        border: 0;
+        box-shadow:0 0 15px 4px rgba(0,0,0,0.15);
+        width: 100%;
+        height: 35px;
+        &:focus {
+            outline: 0;
+            outline-offset: 0;
+        }
+        z-index: 5;
+    }
+    &-button {
+        width: 45px;
+        height: 35px;
+        border: 0;
+        border-radius: 0px 10px 10px 0px;
+        box-shadow:0 0 15px 5px rgba(0,0,0,0.15);
+        background-color: #5A56FD;
+        cursor: pointer;
+        transition: .3s all;
+        &:hover {
+            background-color: rgba($color: #5A56FD, $alpha: .9)
+        }
+        &:active {
+            box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2) inset;
+        }
+        img {
+            margin-top: 4px;
+            width: 80%;
+        }
+    }
+    &-dropdown-menu {
+        padding: 0;
+        margin: 0;
+        text-align: start;
+        border-radius: 0px 0px 10px 10px;
+        position: absolute;
+        top: 40px;
+        width: 100%;
+    }
+    &-item {
+        color: black;
+        cursor: pointer;
+        list-style-type: none;
+        margin-top: 5px;
+        padding: 6px;
+    }
+}

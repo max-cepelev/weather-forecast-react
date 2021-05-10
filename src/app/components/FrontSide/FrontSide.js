@@ -3,6 +3,22 @@ import FrontSideView from '../FrontSideView';
 import {getWeather} from '../services/api';
 
 
+const setDaily = (arr) => {
+    const newArr = [];
+    // погода на 5 дней
+    for (let i = 0; i < 5; i++) {
+        newArr.push(arr[i]);
+    }
+    return newArr;
+}
+const setHourly = (arr) => {
+    const newArr = [];
+    // погода на ближайшие 15 часов, показывает каждые 3 часа
+    for (let i = 2; i < 16; i+=3) {
+        newArr.push(arr[i]);
+    }
+    return newArr;
+}
 export default class FrontSide extends Component {
 
     state = {
@@ -17,23 +33,15 @@ export default class FrontSide extends Component {
         const {lon, lat} = currentCity;
         getWeather(lat, lon, currentLang, units)
             .then(weather => {
-                const hourly = [];
-                for (let n = 2; n < 16; n+=3) {
-                    hourly.push(weather.hourly[n]);
-                }
                 this.setState({
                     currentWeather: weather,
-                    weatherList: hourly
+                    weatherList: this.state.activeButton === "hourly" ? setHourly(weather.hourly) : setDaily(weather.daily)
                 })
             });
     }
 
     onDaily = () => {
-        const daily = [];
-        // погода на 5 дней
-        for (let i = 0; i < 5; i++) {
-            daily.push(this.state.currentWeather.daily[i]);
-        }
+        const daily = setDaily(this.state.currentWeather.daily);
         this.setState({
             weatherList: daily,
             activeButton: "daily"
@@ -41,11 +49,7 @@ export default class FrontSide extends Component {
     }
 
     onHourly = () => {
-        const hourly = [];
-        // погода на ближайшие 15 часов, показывает каждые 3 часа
-        for (let n = 2; n < 16; n+=3) {
-            hourly.push(this.state.currentWeather.hourly[n]);
-        }
+        const hourly = setHourly(this.state.currentWeather.hourly);
         this.setState({
             weatherList: hourly,
             activeButton: "hourly"
