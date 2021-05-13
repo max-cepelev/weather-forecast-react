@@ -1,8 +1,8 @@
 .panel {
     border-radius: 8px;
-    width: clamp(318px, 60vw, 450px);
-    height: clamp(360px, 90vh, 600px);
-    perspective: 600px;
+    width: clamp(318px, 85vw, 450px);
+    height: clamp(450px, 90vh, 600px);
+    perspective: clamp(450px, 90vh, 600px);
     position: relative;
 }
 

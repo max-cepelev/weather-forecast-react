@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import FrontSideView from '../FrontSideView';
+import Spinner from '../Spinner';
 import {getWeather} from '../services/api';
 
 
@@ -25,19 +26,24 @@ export default class FrontSide extends Component {
         currentWeather: null, 
         prevCity: null, 
         weatherList: null,
+        loading: true,
         activeButton: "hourly"
     };
 
     updateWeather = () => {
         const {currentCity, units, currentLang} = this.props;
         const {lon, lat} = currentCity;
-        getWeather(lat, lon, currentLang, units)
+        if (currentCity.id) {
+            getWeather(lat, lon, currentLang, units)
             .then(weather => {
+                console.log(weather);
                 this.setState({
                     currentWeather: weather,
-                    weatherList: this.state.activeButton === "hourly" ? setHourly(weather.hourly) : setDaily(weather.daily)
+                    weatherList: this.state.activeButton === "hourly" ? setHourly(weather.hourly) : setDaily(weather.daily),
+                    loading: false
                 })
-            });
+            })
+        }
     }
 
     onDaily = () => {
@@ -82,6 +88,11 @@ export default class FrontSide extends Component {
     }
 
     render() {
+
+        if (this.state.loading) {
+            return <Spinner/>
+        }
+
         if (!this.state.currentWeather) {
             return null;
         };

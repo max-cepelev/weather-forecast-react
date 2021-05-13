@@ -11,11 +11,11 @@ const WeatherList = ({weatherList, getNewDate}) => {
     if (weatherList[0].temp.day) {
         return (
             weatherList.map(item =>
-                    <div key={item.dt} className='card-item'>
+                    <div key={item.dt} className='card-item flexfont16'>
                         <div className="title">{`${getWeekDay(getNewDate(item.dt))}, ${getNewDate(item.dt).getDate()}`}</div>
                         <WeatherIcon icon={item.weather[0].icon} width='40px'/>
                         <div className=''>
-                            {`${parseInt(item.temp.max)}°`}
+                            {`${parseInt(item.temp.max)}`}
                             <span className='small'>
                                 {`/${parseInt(item.temp.min)}°`}
                             </span>
@@ -26,7 +26,7 @@ const WeatherList = ({weatherList, getNewDate}) => {
     } else {
         return (
             weatherList.map(item =>
-                    <div key={item.dt} className='card-item'>
+                    <div key={item.dt} className='card-item flexfont16'>
                         <div className="title">{getNewDate(item.dt).toLocaleString('ru', {hour: 'numeric', minute: 'numeric'})}</div>
                         <WeatherIcon icon={item.weather[0].icon} width='40px'/>
                         <div className=''>

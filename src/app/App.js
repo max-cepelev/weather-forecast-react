@@ -24,7 +24,7 @@ class App extends Component {
   state = {
     flipped: false,
     currentLang: 'ru',
-    currentCity: localStorage.getItem("currentCity") !== null ? getLocalStorage("currentCity", {}) : getLocalStorage("currentLocation", {}),
+    currentCity: {},
     citiesList: getLocalStorage("citiesList", [])
   };
 
@@ -47,6 +47,7 @@ class App extends Component {
   }
 
   onSelectCity = (city) => {
+    localStorage.setItem('currentCity', JSON.stringify(city));
     this.setState({currentCity: city});
   }
 
@@ -55,17 +56,20 @@ class App extends Component {
     console.log(this.state.currentLang);
   }
 
-  onGetLocation = () => {
+  getLocation = () => {
     getLocation(this.state.currentLang)
       .then(data => {
         const id = makeId();
         const {city, lon, lat} = data;
-        if (this.state.currentCity.name !== city) {
-          localStorage.setItem("currentLocation", JSON.stringify({id: id, name: city, lon: lon, lat: lat}));
-        }
-        
+        localStorage.setItem("currentLocation", JSON.stringify({id: id, name: city, lon: lon, lat: lat}));
       })
+      .then(() => this.setState({
+        currentCity: localStorage.getItem("currentCity") !== null ? getLocalStorage("currentCity", {}) : getLocalStorage("currentLocation", {})
+      }))
+
+    
   }
+
 
   onDelete = (id, citiesList) => {
     const index = citiesList.findIndex(elem => elem.id === id)
@@ -80,11 +84,19 @@ class App extends Component {
     this.setState({
       citiesList: newArr
     })
+
+    if (this.state.currentCity.id === id) {
+      localStorage.removeItem('currentCity');
+      this.setState({currentCity: getLocalStorage("currentLocation", {})});
+    }
+
+  }
+
+  componentDidMount() {
+    this.getLocation();
   }
 
   render() {
-    this.onGetLocation();
-    console.log(this.state.currentCity);
     return (
       <div className={`panel ${this.state.flipped ? 'flip' : ''}`}>
         <div className='panel-front'>

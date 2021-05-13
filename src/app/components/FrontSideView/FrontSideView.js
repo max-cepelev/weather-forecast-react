@@ -15,7 +15,7 @@ const FrontSideView = ({currentLang, currentWeather, currentCityName, onClick, w
         return new Date(date * 1000)
     }
 
-    const {temp, feels_like, dt} = currentWeather;
+    const {temp, feels_like, dt, humidity, wind_deg, wind_speed} = currentWeather;
     const {icon, description} = currentWeather.weather[0];
     const day = getNewDate(dt).toLocaleString(`${currentLang}`, {weekday: 'long'});
     const date = getNewDate(dt).toLocaleString(`${currentLang}`, {day: 'numeric', month: 'long'});
@@ -30,8 +30,24 @@ const FrontSideView = ({currentLang, currentWeather, currentCityName, onClick, w
                     {`${parseInt(temp)}°`}
                     <WeatherIcon icon={icon} width='80px'/>
             </div>
-            <div className='card-weather'>{ucFirst(description)}</div>
             <div className="small">{`Ощущается как ${parseInt(feels_like)}°`}</div>
+            <div className='card-weather'>{ucFirst(description)}</div>
+            <div className="card-row card-conditions flexfont16">
+                <div className="card-row card-conditions">
+                    <img src="icons/humidity.svg" alt="humidity"/>
+                    <span> - </span>
+                    <div>  {`${humidity}%`}</div>
+                </div>
+                <div className="card-row card-conditions">
+                    <img src="icons/wind.svg" alt="wind" />
+                    <span> - </span>
+                    <img src="icons/arrow.svg" alt="compass" style={{transform: `rotate(${wind_deg}deg)`, width: "20px"}}/>
+                    <span></span>
+                    <div>{`${parseInt(wind_speed)} м/с`}</div>
+                </div>
+
+            </div>
+            
             <div className="card-row">
                 <div className={`card-select ${activeButton === "hourly" && "active"}`} onClick={onHourly}>По часам</div>
                 <div className={`card-select ${activeButton === "daily" && "active"}`} onClick={onDaily}>По дням</div>

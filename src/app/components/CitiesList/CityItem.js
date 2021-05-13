@@ -4,7 +4,6 @@ export default class CityItem extends Component {
     onClick = () => {
         const {onSelect, city} = this.props;
         onSelect(city);
-        localStorage.setItem('currentCity', JSON.stringify(city));
     }
     render() {
         const {city, isSelected, onDelete} = this.props;

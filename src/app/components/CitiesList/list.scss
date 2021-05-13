@@ -34,7 +34,8 @@
     &-delete {
         width: 20%;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
+        padding-right: 10px;
         img {
             width: 35px;
         }

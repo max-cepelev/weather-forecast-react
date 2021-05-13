@@ -13,8 +13,12 @@ const CitySearch = ({addCity}) => {
         if (value.length > 3) {
             getCity(value)
             .then((res) => {
-                console.log(res);
-                setResult(res);
+                if (res.length !== 0) {
+                    setResult(res);
+                } else {
+                    setResult(null)
+                }
+                
                 setValue("");
             })
             .catch(() => {
@@ -29,12 +33,17 @@ const CitySearch = ({addCity}) => {
         setResult([]);
     }
 
-    return (
-        <div className="search">
-            <div className="search-container">
-                <input value={value} onChange={(e) => setValue(e.target.value)} type="text" placeholder="Поиск города" className="search-text"/>
+    const onKeyPressHandler = (event) => {
+        if (event.charCode === 13) {
+            onSearch();
+        }
+    }
+
+    const ResultList = (answer) => {
+        if (answer !== null) {
+            return (
                 <ul  className="search-dropdown-menu">
-                    {result.map((city, id) => {
+                    {answer.map((city, id) => {
                         return (
                             <CitySearchResult
                             key={id}
@@ -44,6 +53,26 @@ const CitySearch = ({addCity}) => {
                         )
                     })}
                 </ul>
+            )
+        } else {
+            return (
+                <ul className="search-dropdown-menu">
+                    <li onClick={() => setResult([])} className="search-item">Не найден</li>
+                </ul>
+            )
+        }
+    }
+
+    return (
+        <div className="search">
+            <div className="search-container">
+                <input
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    onKeyPress={onKeyPressHandler}
+                    type="text" placeholder="Поиск города"
+                    className="search-text"/>
+                {ResultList(result)}
             </div>
             <button onClick={onSearch} type="submit" className="search-button"><img src="/icons/search.svg" alt="search"/></button>
         </div>

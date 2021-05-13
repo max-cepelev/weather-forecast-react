@@ -27,9 +27,6 @@
         align-items: center;
         width: 100%;
     }
-    &-temperature .small {
-        font-size: 22px;
-    }
     &-footer {
         border-top: 3.5px solid #fff;
         padding-top: 12px;
@@ -61,6 +58,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        align-items: center;
         height: 100px;
     }
     &-select {
@@ -69,8 +67,18 @@
         cursor: pointer;
         height: 40px;
         align-self: center;
+        margin: 0 15px;
         &.active {
             border-bottom: 2px solid #FFFFFF;
+        }
+    }
+    &-conditions {
+        justify-content: center;
+        img {
+            height: 30px;
+        }
+        span {
+            margin: 0 7px;
         }
     }
     &.is-01d {
