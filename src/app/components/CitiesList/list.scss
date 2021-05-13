@@ -27,6 +27,7 @@
             }
         }
         p {
+            display: block;
             width: 80%;
             margin: 5px 0;
         }
@@ -37,7 +38,7 @@
         justify-content: flex-end;
         padding-right: 10px;
         img {
-            width: 35px;
+            width: 30px;
         }
     }
 }

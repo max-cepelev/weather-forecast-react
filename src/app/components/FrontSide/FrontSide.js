@@ -36,7 +36,6 @@ export default class FrontSide extends Component {
         if (currentCity.id) {
             getWeather(lat, lon, currentLang, units)
             .then(weather => {
-                console.log(weather);
                 this.setState({
                     currentWeather: weather,
                     weatherList: this.state.activeButton === "hourly" ? setHourly(weather.hourly) : setDaily(weather.daily),
