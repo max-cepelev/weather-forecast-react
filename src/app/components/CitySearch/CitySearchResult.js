@@ -1,10 +1,11 @@
 import React from 'react';
 
 const CitySearchResult = ({city, onClick}) => {
+    const name = city.local_names.ru || city.name;
     return (
         <li className="search-item"
             onClick={onClick}>
-            {city.local_names.ru}
+            {name}
         </li>
     )
 }

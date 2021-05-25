@@ -1,0 +1,11 @@
+.wind {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70px;
+    &-mini {
+        font-size: 12px;
+        width: 48px;
+    }
+}
+

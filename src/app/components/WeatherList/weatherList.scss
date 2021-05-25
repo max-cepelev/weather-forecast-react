@@ -1,0 +1,10 @@
+.weather-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 125px;
+    p {
+        margin: 0;
+    }
+}

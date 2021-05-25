@@ -1,6 +1,6 @@
-import React from 'react';
 import WeatherIcon from '../WeatherIcon';
 import WeatherList from '../WeatherList';
+import Wind from '../Wind/Wind';
 import './FrontSide.scss';
 import optionsImage from './options.svg';
 
@@ -14,6 +14,8 @@ const FrontSideView = ({currentLang, currentWeather, currentCityName, onClick, w
     const getNewDate = (date) => {
         return new Date(date * 1000)
     }
+
+    console.log(currentWeather);
 
     const {temp, feels_like, dt, humidity, wind_deg, wind_speed} = currentWeather;
     const {icon, description} = currentWeather.weather[0];
@@ -41,19 +43,15 @@ const FrontSideView = ({currentLang, currentWeather, currentCityName, onClick, w
                 <div className="card-row card-conditions">
                     <img src="icons/wind.svg" alt="wind" />
                     <span> - </span>
-                    <img src="icons/arrow.svg" alt="compass" style={{transform: `rotate(${wind_deg}deg)`, width: "20px"}}/>
-                    <span></span>
-                    <div>{`${parseInt(wind_speed)} м/с`}</div>
+                    <Wind deg={wind_deg} speed={wind_speed} classes="wind" arrowHeight="18px"/>
                 </div>
-
             </div>
-            
             <div className="card-row">
                 <div className={`card-select ${activeButton === "hourly" && "active"}`} onClick={onHourly}>По часам</div>
                 <div className={`card-select ${activeButton === "daily" && "active"}`} onClick={onDaily}>По дням</div>
             </div>
             <div className="card-row">
-                <WeatherList weatherList={weatherList} getNewDate={getNewDate}/>
+                {weatherList.map(weatherItem => (<WeatherList key={weatherItem.dt} weatherItem={weatherItem} getNewDate={getNewDate}/>))}
             </div>
             <div className='card-row card-footer'>
                 <h1 className='card-city flexfont24'>{currentCityName}</h1>

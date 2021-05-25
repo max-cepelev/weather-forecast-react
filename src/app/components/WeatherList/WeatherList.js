@@ -1,41 +1,31 @@
-import React from 'react';
+import './weatherList.scss';
 import WeatherIcon from '../WeatherIcon';
+import Wind from '../Wind/Wind';
 
-const WeatherList = ({weatherList, getNewDate}) => {
+const WeatherList = ({weatherItem, getNewDate}) => {
     
     const getWeekDay = (date) => {
         let days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
         return days[date.getDay()];
     }
-
-    if (weatherList[0].temp.day) {
-        return (
-            weatherList.map(item =>
-                    <div key={item.dt} className='card-item flexfont16'>
-                        <div className="title">{`${getWeekDay(getNewDate(item.dt))}, ${getNewDate(item.dt).getDate()}`}</div>
-                        <WeatherIcon icon={item.weather[0].icon} width='40px'/>
-                        <div className=''>
-                            {`${parseInt(item.temp.max)}`}
-                            <span className='small'>
-                                {`/${parseInt(item.temp.min)}°`}
-                            </span>
-                        </div>
-                    </div>
-            )
-        )
+    const {dt, weather, temp, wind_deg, wind_speed} = weatherItem;
+    let title = "";
+    let tempView = "";
+    if (weatherItem.temp.day) {
+        title = `${getWeekDay(getNewDate(dt))}, ${getNewDate(dt).getDate()}`;
+        tempView  = `${parseInt(temp.max)}/${parseInt(temp.min)}°`
     } else {
-        return (
-            weatherList.map(item =>
-                    <div key={item.dt} className='card-item flexfont16'>
-                        <div className="title">{getNewDate(item.dt).toLocaleString('ru', {hour: 'numeric', minute: 'numeric'})}</div>
-                        <WeatherIcon icon={item.weather[0].icon} width='40px'/>
-                        <div className=''>
-                            {`${parseInt(item.temp)}°`}
-                        </div>
-                    </div>
-            )
-        )
+        title = getNewDate(dt).toLocaleString('ru', {hour: 'numeric', minute: 'numeric'});
+        tempView = `${parseInt(temp)}°`;
     }
+    return (
+        <div className='weather-list flexfont16'>
+            <p className="title">{title}</p>
+            <WeatherIcon icon={weather[0].icon} width='40px'/>
+            <p>{tempView}</p>
+            <Wind deg={wind_deg} speed={wind_speed} classes="wind wind-mini" arrowHeight="12px"/>
+        </div>
+    )
 }
 
 export default WeatherList;

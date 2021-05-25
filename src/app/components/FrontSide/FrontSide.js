@@ -65,7 +65,8 @@ export default class FrontSide extends Component {
         if (nextProps.currentCity.id !== prevState.prevCity) {
             return {
                 prevCity: nextProps.currentCity.id,
-                currentWeather: null
+                currentWeather: null,
+                loading: true
             }
         }
 
@@ -96,16 +97,17 @@ export default class FrontSide extends Component {
             return null;
         };
 
-        const {name} = this.props.currentCity;
+        const {currentLang, currentCity, onClick} = this.props;
+        const {currentWeather, weatherList, activeButton} = this.state;
 
         return (
             <FrontSideView
-                currentLang={this.props.currentLang}
-                currentWeather={this.state.currentWeather.current}
-                currentCityName={name}
-                onClick={this.props.onClick}
-                weatherList={this.state.weatherList}
-                activeButton={this.state.activeButton}
+                currentLang={currentLang}
+                currentWeather={currentWeather.current}
+                currentCityName={currentCity.name}
+                onClick={onClick}
+                weatherList={weatherList}
+                activeButton={activeButton}
                 onDaily={this.onDaily}
                 onHourly={this.onHourly}
             />

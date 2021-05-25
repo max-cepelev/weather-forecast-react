@@ -1,3 +1,102 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 168 168">
-  <path fill="#fff" d="M160 128c-1-3-3-4-6-5a69 69 0 0 1-46-110 7 7 0 0 0-5-12 85 85 0 0 0-43 5 84 84 0 0 0-46 110c13 32 44 52 78 52a84 84 0 0 0 67-33c1-2 2-5 1-7zm-41 20a69 69 0 0 1-91-37 69 69 0 0 1 38-91c7-3 15-5 23-5a84 84 0 0 0 50 120c-6 6-13 10-20 13z"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg32874"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="01n.svg">
+  <defs
+     id="defs32868">
+    <clipPath
+       id="clipPath51022"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path51020"
+         d="M 648.391,1711.63 H 708 v -35.52 h -59.609 z" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.94653178"
+     inkscape:cx="233.73556"
+     inkscape:cy="415.8473"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g51032"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1012"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata32871">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       transform="matrix(1.5606746,0,0,-1.5606746,72.120081,20.267275)"
+       id="g51012">
+      <path
+         id="path51014"
+         style="fill:#e6f0fa;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         d="m 0,0 c 1.901,-3.525 2.983,-7.559 2.983,-11.846 0,-13.808 -11.193,-25 -25,-25 -3.798,0 -7.385,0.872 -10.609,2.388 2.224,-14.374 14.613,-25.389 29.609,-25.389 16.569,0 30,13.431 30,30 C 26.983,-14.297 15.151,-1.514 0,0" />
+    </g>
+    <g
+       id="g51016"
+       transform="matrix(1.5606746,0,0,-1.5606746,-990.72523,2729.536)">
+      <g
+         id="g51018" />
+      <g
+         id="g51030">
+        <g
+           style="opacity:0.149994"
+           id="g51028"
+           clip-path="url(#clipPath51022)">
+          <g
+             id="g51026"
+             transform="translate(678,1687.1133)">
+            <path
+               id="path51024"
+               style="fill:#000064;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               d="m 0,0 c -10.077,0 -18.971,4.978 -24.401,12.603 -1.817,0.407 -3.561,1.011 -5.208,1.786 C -27.386,0.015 -14.996,-11 0,-11 c 16.568,0 30,13.431 30,30 0,1.884 -0.177,3.727 -0.509,5.514 C 26.912,10.566 14.694,0 0,0" />
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       transform="matrix(2.1460787,0,0,-2.1460787,73.908121,3.0961261)"
+       id="g51032">
+      <path
+         id="path51034"
+         style="fill:none;stroke:#ffffff;stroke-width:1.45444;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         d="m -0.83316628,-8.0011746 c 1.3824482,-2.5634564 2.16930188,-5.4970674 2.16930188,-8.6146664 0,-10.041475 -8.1397906,-18.180538 -18.1805386,-18.180538 -2.761987,0 -5.370531,0.634137 -7.715093,1.736605 1.617341,-10.453082 10.626888,-18.463427 21.532302,-18.463427 12.0493339,0 21.816646,9.767312 21.816646,21.816645 0,11.308295 -8.604485,20.6043684 -19.62261828,21.7053814 z" />
+    </g>
+  </g>
 </svg>

@@ -37,5 +37,5 @@ body {
 }
 
 .flexfont16 {
-  font-size: clamp(14px, 4vw , 16px);
+  font-size: clamp(13px, 3.3vw , 16px);
 }

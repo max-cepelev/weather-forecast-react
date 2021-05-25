@@ -1,8 +1,7 @@
 import { Component } from 'react';
 import FrontSide from './components/FrontSide';
 import BackSide from './components/BackSide';
-import './panel.css';
-// import cities from './components/city.list.min.json';
+import './panel.scss';
 import {getLocation} from './components/services/api';
 
 const makeId = () => {
@@ -30,7 +29,7 @@ class App extends Component {
 
   onAddCity = (city) => {
     const {lat, lon, local_names} = city;
-    const name = local_names.ru;
+    const name = local_names.ru || city.name;
     const id = makeId();
     const citiesList = this.state.citiesList;
     if (!citiesList.find(item => item.name === name)) {
@@ -70,20 +69,17 @@ class App extends Component {
     
   }
 
-
   onDelete = (id, citiesList) => {
-    const index = citiesList.findIndex(elem => elem.id === id)
 
-    const before = citiesList.slice(0, index);
-    const after = citiesList.slice(index + 1);
+    const index = citiesList.findIndex(elem => elem.id === id);
 
-    const newArr = [...before, ...after];
+    const newArr = citiesList.slice(0, index).concat(citiesList.slice(index + 1));
 
     localStorage.setItem("citiesList", JSON.stringify(newArr));
 
     this.setState({
       citiesList: newArr
-    })
+    });
 
     if (this.state.currentCity.id === id) {
       localStorage.removeItem('currentCity');

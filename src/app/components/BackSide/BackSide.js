@@ -6,7 +6,6 @@ import './button.css';
 
 
 const BackSide = ({onClick, citiesList, currentCity, onSelect, onClickLang, onAddCity, getLocalStorage, onDelete}) => {
-    
     return (
         <div className='card-back'>
             <div>
@@ -18,7 +17,7 @@ const BackSide = ({onClick, citiesList, currentCity, onSelect, onClickLang, onAd
                     getLocalStorage={getLocalStorage}
                     onDelete={onDelete}
                 />
-                <CitySearch addCity={onAddCity}/>
+                {citiesList.length < 10 ? <CitySearch addCity={onAddCity}/> : <div className="search-item">Удалите город чтобы добавить новый</div>}
             </div>
             <button className='button' onClick={onClick} >Назад</button>
         </div>
