@@ -11,6 +11,7 @@ const WeatherList = ({weatherItem, getNewDate}) => {
     const {dt, weather, temp, wind_deg, wind_speed} = weatherItem;
     let title = "";
     let tempView = "";
+    let weatherIcon = weather[0].id >= 800 ? weather[0].icon : weather[0].id;
     if (weatherItem.temp.day) {
         title = `${getWeekDay(getNewDate(dt))}, ${getNewDate(dt).getDate()}`;
         tempView  = `${parseInt(temp.max)}/${parseInt(temp.min)}°`
@@ -21,7 +22,7 @@ const WeatherList = ({weatherItem, getNewDate}) => {
     return (
         <div className='weather-list flexfont16'>
             <p className="title">{title}</p>
-            <WeatherIcon icon={weather[0].icon} width='40px'/>
+            <WeatherIcon icon={weatherIcon} width='40px'/>
             <p>{tempView}</p>
             <Wind deg={wind_deg} speed={wind_speed} classes="wind wind-mini" arrowHeight="12px"/>
         </div>

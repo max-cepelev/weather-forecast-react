@@ -34,8 +34,13 @@ class App extends Component {
     const citiesList = this.state.citiesList;
     if (!citiesList.find(item => item.name === name)) {
       citiesList.push({id, name, lat, lon});
-      this.setState({citiesList: citiesList});
+      let addedCity = citiesList[citiesList.findIndex(item => item.id === id)];
       localStorage.setItem("citiesList", JSON.stringify(citiesList));
+      localStorage.setItem('currentCity', JSON.stringify(addedCity));
+      this.setState({
+        citiesList: citiesList,
+        currentCity: addedCity
+      });
     } else {
       return
     }

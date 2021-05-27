@@ -5,7 +5,8 @@ const CitySearchResult = ({city, onClick}) => {
     return (
         <li className="search-item"
             onClick={onClick}>
-            {name}
+            <img src="icons/add.svg" alt="add" />
+            <p>{name}</p>
         </li>
     )
 }

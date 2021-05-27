@@ -54,10 +54,15 @@
         width: 100%;
     }
     &-item {
+        display: flex;
+        align-items: center;
         color: black;
         cursor: pointer;
         list-style-type: none;
         margin-top: 5px;
         padding: 6px;
+        p {
+            margin: 0;
+        }
     }
 }

@@ -15,10 +15,8 @@ const FrontSideView = ({currentLang, currentWeather, currentCityName, onClick, w
         return new Date(date * 1000)
     }
 
-    console.log(currentWeather);
-
     const {temp, feels_like, dt, humidity, wind_deg, wind_speed} = currentWeather;
-    const {icon, description} = currentWeather.weather[0];
+    const {id, icon, description} = currentWeather.weather[0];
     const day = getNewDate(dt).toLocaleString(`${currentLang}`, {weekday: 'long'});
     const date = getNewDate(dt).toLocaleString(`${currentLang}`, {day: 'numeric', month: 'long'});
 
@@ -30,7 +28,7 @@ const FrontSideView = ({currentLang, currentWeather, currentCityName, onClick, w
             </div>
             <div className='card-temperature'>
                     {`${parseInt(temp)}°`}
-                    <WeatherIcon icon={icon} width='80px'/>
+                    <WeatherIcon icon={id >= 800 ? icon : id} width='80px'/>
             </div>
             <div className="small">{`Ощущается как ${parseInt(feels_like)}°`}</div>
             <div className='card-weather'>{ucFirst(description)}</div>
@@ -50,7 +48,7 @@ const FrontSideView = ({currentLang, currentWeather, currentCityName, onClick, w
                 <div className={`card-select ${activeButton === "hourly" && "active"}`} onClick={onHourly}>По часам</div>
                 <div className={`card-select ${activeButton === "daily" && "active"}`} onClick={onDaily}>По дням</div>
             </div>
-            <div className="card-row">
+            <div className="scroll">
                 {weatherList.map(weatherItem => (<WeatherList key={weatherItem.dt} weatherItem={weatherItem} getNewDate={getNewDate}/>))}
             </div>
             <div className='card-row card-footer'>

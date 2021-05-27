@@ -4,22 +4,25 @@ import Spinner from '../Spinner';
 import {getWeather} from '../services/api';
 
 
-const setDaily = (arr) => {
-    const newArr = [];
-    // погода на 5 дней
-    for (let i = 0; i < 5; i++) {
-        newArr.push(arr[i]);
-    }
-    return newArr;
-}
+// const setDaily = (arr) => {
+//     const newArr = [];
+//     // погода на 5 дней
+//     for (let i = 0; i < 5; i++) {
+//         newArr.push(arr[i]);
+//     }
+//     return newArr;
+// }
 const setHourly = (arr) => {
     const newArr = [];
     // погода на ближайшие 15 часов, показывает каждые 3 часа
-    for (let i = 2; i < 16; i+=3) {
+    for (let i = 0; i < 24; i++) {
         newArr.push(arr[i]);
     }
     return newArr;
 }
+
+
+
 export default class FrontSide extends Component {
 
     state = {
@@ -38,7 +41,7 @@ export default class FrontSide extends Component {
             .then(weather => {
                 this.setState({
                     currentWeather: weather,
-                    weatherList: this.state.activeButton === "hourly" ? setHourly(weather.hourly) : setDaily(weather.daily),
+                    weatherList: this.state.activeButton === "hourly" ? setHourly(weather.hourly) : weather.daily,
                     loading: false
                 })
             })
@@ -46,11 +49,12 @@ export default class FrontSide extends Component {
     }
 
     onDaily = () => {
-        const daily = setDaily(this.state.currentWeather.daily);
+        const daily = this.state.currentWeather.daily;
         this.setState({
             weatherList: daily,
             activeButton: "daily"
         })
+        document.querySelector(".scroll").scrollLeft = 0;
     }
 
     onHourly = () => {
@@ -59,6 +63,7 @@ export default class FrontSide extends Component {
             weatherList: hourly,
             activeButton: "hourly"
         })
+        document.querySelector(".scroll").scrollLeft = 0;
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {

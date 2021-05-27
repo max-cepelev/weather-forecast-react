@@ -17,12 +17,13 @@
             &:after {
                 background: url('checkmark.svg');
                 background-size: 100%;
-                content: ' ';
+                content: '';
                 display: block;
                 height: 15px;
                 left: -4px;
                 position: absolute;
-                top: 12px;
+                top: 50%;
+                transform: translateY(-50%);
                 width: 15px;
             }
         }
