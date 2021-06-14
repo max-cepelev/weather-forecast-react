@@ -48,9 +48,7 @@ const FrontSideView = ({currentLang, currentWeather, currentCityName, onClick, w
                 <div className={`card-select ${activeButton === "hourly" && "active"}`} onClick={onHourly}>По часам</div>
                 <div className={`card-select ${activeButton === "daily" && "active"}`} onClick={onDaily}>По дням</div>
             </div>
-            <div className="scroll">
-                {weatherList.map(weatherItem => (<WeatherList key={weatherItem.dt} weatherItem={weatherItem} getNewDate={getNewDate}/>))}
-            </div>
+            <WeatherList weatherList={weatherList} getNewDate={getNewDate}/>
             <div className='card-row card-footer'>
                 <h1 className='card-city flexfont24'>{currentCityName}</h1>
                 <button className='card-options' onClick={onClick}>

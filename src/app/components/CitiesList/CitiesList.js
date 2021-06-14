@@ -7,6 +7,7 @@ const CitiesList = ({citiesList, currentCity, onSelect, getLocalStorage, onDelet
         onSelect(getLocalStorage('currentLocation', {}));
         localStorage.removeItem('currentCity');
     }
+    let currentLoc = getLocalStorage("currentLocation", {});
     // сортировка по алфавиту
     citiesList.sort(function(a, b) {
         let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
@@ -20,7 +21,7 @@ const CitiesList = ({citiesList, currentCity, onSelect, getLocalStorage, onDelet
         <ul className='list flexfont24'>
             <li
                 onClick={onClick}
-                className={`list-item ${currentCity.id === getLocalStorage("currentLocation", {}).id ? 'is-selected' : ''}`}>Текущее местоположение
+                className={`list-item ${currentCity.id === currentLoc.id ? 'is-selected' : ''}`}>{currentLoc.name}
             </li>
             {citiesList.map(city => {
                 return (

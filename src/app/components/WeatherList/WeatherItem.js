@@ -2,7 +2,7 @@ import './weatherList.scss';
 import WeatherIcon from '../WeatherIcon';
 import Wind from '../Wind/Wind';
 
-const WeatherList = ({weatherItem, getNewDate}) => {
+const WeatherItem = ({weatherItem, getNewDate}) => {
     
     const getWeekDay = (date) => {
         let days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
@@ -29,4 +29,4 @@ const WeatherList = ({weatherItem, getNewDate}) => {
     )
 }
 
-export default WeatherList;
+export default WeatherItem;

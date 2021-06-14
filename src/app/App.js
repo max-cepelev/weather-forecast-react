@@ -29,7 +29,7 @@ class App extends Component {
 
   onAddCity = (city) => {
     const {lat, lon, local_names} = city;
-    const name = local_names.ru || city.name;
+    const name = local_names ? local_names.ru : city.name;
     const id = makeId();
     const citiesList = this.state.citiesList;
     if (!citiesList.find(item => item.name === name)) {

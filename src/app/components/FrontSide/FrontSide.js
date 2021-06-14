@@ -14,15 +14,12 @@ import {getWeather} from '../services/api';
 // }
 const setHourly = (arr) => {
     const newArr = [];
-    // погода на ближайшие 15 часов, показывает каждые 3 часа
+    // погода на ближайшие 24 часа
     for (let i = 0; i < 24; i++) {
         newArr.push(arr[i]);
     }
     return newArr;
 }
-
-
-
 export default class FrontSide extends Component {
 
     state = {
@@ -53,8 +50,8 @@ export default class FrontSide extends Component {
         this.setState({
             weatherList: daily,
             activeButton: "daily"
-        })
-        document.querySelector(".scroll").scrollLeft = 0;
+        });
+        document.querySelector('.scroll').scrollLeft = 0;
     }
 
     onHourly = () => {
@@ -62,8 +59,8 @@ export default class FrontSide extends Component {
         this.setState({
             weatherList: hourly,
             activeButton: "hourly"
-        })
-        document.querySelector(".scroll").scrollLeft = 0;
+        });
+        document.querySelector('.scroll').scrollLeft = 0;
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {

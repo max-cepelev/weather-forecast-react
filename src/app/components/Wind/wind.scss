@@ -7,9 +7,16 @@
     }
     &-mini {
         font-size: 12px;
+        justify-content: center;
         div {
             margin-left: 4px;
         }
+    }
+}
+
+@media (max-width: 425px) {
+    .wind-mini {
+        flex-direction: column;
     }
 }
 

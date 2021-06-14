@@ -83,7 +83,6 @@
         overflow-y: hidden;
         scroll-snap-type: x mandatory;
         scroll-snap-stop: always;
-        scroll-behavior: smooth;
         &::-webkit-scrollbar {
             height: 0;
         }

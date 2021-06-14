@@ -10,7 +10,7 @@ const CitySearch = ({addCity}) => {
     const [result, setResult] = useState([]);
 
     const onSearch = () => {
-        if (value.length > 3) {
+        if (value.length > 1) {
             getCity(value)
             .then((res) => {
                 if (res.length !== 0) {
