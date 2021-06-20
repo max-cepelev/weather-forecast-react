@@ -1,127 +1,143 @@
-import { Component } from 'react';
-import FrontSide from './components/FrontSide';
-import BackSide from './components/BackSide';
-import './panel.scss';
-import {getLocation} from './components/services/api';
+import './panel.scss'
+import { useState, useEffect } from 'react'
+import { getCityName } from './services/getData'
+import FrontSide from './components/FrontSide'
+import BackSide from './components/BackSide'
 
-const makeId = () => {
-  let ID = "";
-  let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  for ( var i = 0; i < 12; i++ ) {
-    ID += characters.charAt(Math.floor(Math.random() * 36));
-  }
-  return ID;
-}
 
-const getLocalStorage = (name, ifErrorValue) => {
-  let data = JSON.parse(localStorage.getItem(name));
-  if (data == null) data = ifErrorValue;
-  return data;
-}
-class App extends Component {
+function App() {
 
-  state = {
-    flipped: false,
-    currentLang: 'ru',
-    currentCity: {},
-    citiesList: getLocalStorage("citiesList", [])
-  };
+	const makeId = () => {
+		let ID = "";
+		let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		for ( let i = 0; i < 12; i++ ) {
+		ID += characters.charAt(Math.floor(Math.random() * 36));
+		}
+		return ID;
+	}
 
-  onAddCity = (city) => {
-    const {lat, lon, local_names} = city;
-    const name = local_names ? local_names.ru : city.name;
-    const id = makeId();
-    const citiesList = this.state.citiesList;
-    if (!citiesList.find(item => item.name === name)) {
-      citiesList.push({id, name, lat, lon});
-      let addedCity = citiesList[citiesList.findIndex(item => item.id === id)];
-      localStorage.setItem("citiesList", JSON.stringify(citiesList));
-      localStorage.setItem('currentCity', JSON.stringify(addedCity));
-      this.setState({
-        citiesList: citiesList,
-        currentCity: addedCity
-      });
-    } else {
-      return
-    }
-  }
+	const [options, setOptions] = useState(JSON.parse(localStorage.getItem("weatherOptions")) || {
+			lang: 'ru',
+			units: 'metric',
+			citiesList: [],
+			currentCity: null,
+			currentLocation: null
+	});
 
-  onFlip = () => {
-    this.setState({flipped: !this.state.flipped});
-  }
+	const [flip, setFlip] = useState(false);
 
-  onSelectCity = (city) => {
-    localStorage.setItem('currentCity', JSON.stringify(city));
-    this.setState({currentCity: city});
-  }
+	// Получение текущего местоположения от браузера при монтировании компонента
+	// Get the current location from the browser when the component is mounted
+	useEffect(() => {
+		navigator.geolocation.getCurrentPosition((pos) => {
+			const lat = pos.coords.latitude;
+			const lon = pos.coords.longitude;
+			getCityName(lat, lon)
+				.then(res => {
+					setOptions(prevOptions => {
+						return {
+							...prevOptions,
+							currentLocation: {
+								id: makeId(),
+								name: res[0].local_names.ru || res[0].name || "Неопределен",
+								lat: res[0].lat,
+								lon: res[0].lon
+							}
+						}
+					})
+				})
+		}, (err) => {
+			console.log(err);
+			setOptions(prevOptions => {
+				if (prevOptions.currentLocation) {
+					return {...prevOptions, currentLocation: prevOptions.currentLocation}
+				} else {
+					return {
+						...prevOptions,
+						currentLocation: {
+							id: makeId(),
+							name: "Москва",
+							lat: 55.751244,
+							lon: 37.618423
+						}
+					}
+				}
+			})
+		})
+	}, [])
+	
+	// Запись текущего состояния в local storage
+	// Write the current state to local storage
+	useEffect(() => {
+		localStorage.setItem("weatherOptions", JSON.stringify(options));
+	}, [options]);
 
-  onSelectLang = () => {
-    this.setState({currentLang: this.state.currentLang === 'en' ? "ru" : "en"});
-    console.log(this.state.currentLang);
-  }
+	const onFlip = () => {
+		setFlip(!flip)
+	}
 
-  getLocation = () => {
-    getLocation(this.state.currentLang)
-      .then(data => {
-        const id = makeId();
-        const {city, lon, lat} = data;
-        localStorage.setItem("currentLocation", JSON.stringify({id: id, name: city, lon: lon, lat: lat}));
-      })
-      .then(() => this.setState({
-        currentCity: localStorage.getItem("currentCity") !== null ? getLocalStorage("currentCity", {}) : getLocalStorage("currentLocation", {})
-      }))
+	const onAddCity = (city) => {
+		const {lat, lon, local_names} = city;
+		const name = local_names ? local_names.ru : city.name;
+		const id = makeId();
+		if (!options.citiesList.find(item => item.name === name)) {
+			setOptions((prevOptions) => {
+				return {
+					...prevOptions,
+					currentCity: {id, name, lat, lon},
+					citiesList: [...prevOptions.citiesList, {id, name, lat, lon}]
+				}
+			})
+		} else {
+			return
+		}
+	}
 
-    
-  }
+	const onSelectCity = (city) => {
+		setOptions(prevOptions => {
+			return {
+				...prevOptions,
+				currentCity: city,
+			}
+		})
+	}
 
-  onDelete = (id, citiesList) => {
+	const onDelete = (id) => {
 
-    const index = citiesList.findIndex(elem => elem.id === id);
+		setOptions((prevOptions) => {
+			const newCitiesList = prevOptions.citiesList.filter(item => item.id !== id);
+			return {...prevOptions, citiesList: newCitiesList};
+		})
 
-    const newArr = citiesList.slice(0, index).concat(citiesList.slice(index + 1));
+		if (options.currentCity && options.currentCity.id === id) {
+			setOptions(prevOptions => {
+				return {
+					...prevOptions,
+					currentCity: null
+				}
+			});
+		}
+	}
 
-    localStorage.setItem("citiesList", JSON.stringify(newArr));
-
-    this.setState({
-      citiesList: newArr
-    });
-
-    if (this.state.currentCity.id === id) {
-      localStorage.removeItem('currentCity');
-      this.setState({currentCity: getLocalStorage("currentLocation", {})});
-    }
-
-  }
-
-  componentDidMount() {
-    this.getLocation();
-  }
-
-  render() {
-    return (
-      <div className={`panel ${this.state.flipped ? 'flip' : ''}`}>
-        <div className='panel-front'>
-          <FrontSide 
-            onClick={this.onFlip}
-            currentLang={this.state.currentLang}
-            currentCity={this.state.currentCity}
-            units = 'metric'/>
-        </div>
-        <div className='panel-back'>
-          <BackSide
-            citiesList={this.state.citiesList}
-            onClick={this.onFlip}
-            onClickLang={this.onSelectLang}
-            currentCity={this.state.currentCity}
-            onSelect={this.onSelectCity}
-            onDelete={this.onDelete}
-            onAddCity={this.onAddCity}
-            getLocalStorage={getLocalStorage}
-          />
-        </div>
-      </div>
-    );
-  }
+	return (
+		<div className={`panel ${flip ? 'flip' : ''}`}>
+			<div className='panel-front'>
+			<FrontSide 
+				onClick={onFlip}
+				options={options}
+			/>
+			</div>
+			<div className='panel-back'>
+				<BackSide
+					options={options}
+					onClick={onFlip}
+					onSelectCity={onSelectCity}
+					onDeleteCity={onDelete}
+					onAddCity={onAddCity}
+				/>
+			</div>
+		</div>
+		);
 }
 
 export default App;

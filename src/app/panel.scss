@@ -2,7 +2,7 @@
     border-radius: 8px;
     width: clamp(318px, 85vw, 450px);
     height: 600px;
-    perspective: 1000px;
+    perspective: 800px;
     position: relative;
     &.flip &-front{
         transform: rotateY(179deg);

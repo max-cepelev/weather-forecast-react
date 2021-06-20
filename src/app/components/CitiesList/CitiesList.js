@@ -1,41 +1,37 @@
-import React from 'react';
 import './list.scss';
 import CityItem from './CityItem';
 
-const CitiesList = ({citiesList, currentCity, onSelect, getLocalStorage, onDelete}) => {
-    const onClick = () => {
-        onSelect(getLocalStorage('currentLocation', {}));
-        localStorage.removeItem('currentCity');
-    }
-    let currentLoc = getLocalStorage("currentLocation", {});
+export default function CitiesList({options, onSelectCity, onDeleteCity}) {
+
+    const {currentCity, citiesList, currentLocation} = options;
+
     // сортировка по алфавиту
+    // sort alphabetically
     citiesList.sort(function(a, b) {
         let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
-        if (nameA < nameB) //сортируем строки по возрастанию
+        if (nameA < nameB) //сортируем строки по возрастанию/ sort lines in ascending order
             return -1
         if (nameA > nameB)
             return 1
-        return 0 // Никакой сортировки
+        return 0 // Никакой сортировки/ No sorting
         })
+
     return (
         <ul className='list flexfont24'>
-            <li
-                onClick={onClick}
-                className={`list-item ${currentCity.id === currentLoc.id ? 'is-selected' : ''}`}>{currentLoc.name}
+            <li onClick={() => onSelectCity(null)} className={`list-location ${currentCity ? "" : "is-selected"}`}>
+                {currentLocation ? currentLocation.name : "Не определен"}
             </li>
             {citiesList.map(city => {
                 return (
                     <CityItem 
                         key={city.id}
-                        isSelected={currentCity.id === city.id} 
+                        isSelected={currentCity ? currentCity.id === city.id : false} 
                         city={city}
-                        onSelect={onSelect}
-                        onDelete={() => onDelete(city.id, citiesList)}
+                        onSelectCity={onSelectCity}
+                        onDeleteCity={onDeleteCity}
                     />
                 );
             })}
         </ul>
     );
 }
-
-export default CitiesList;

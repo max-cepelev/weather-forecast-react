@@ -1,17 +1,8 @@
-import React, {Component} from 'react';
-import FrontSideView from '../FrontSideView';
-import Spinner from '../Spinner';
-import {getWeather} from '../services/api';
+import { useState, useEffect } from 'react'
+import Spinner from '../Spinner'
+import FrontSideView from '../FrontSideView'
+import {getWeather} from '../../services/getData'
 
-
-// const setDaily = (arr) => {
-//     const newArr = [];
-//     // погода на 5 дней
-//     for (let i = 0; i < 5; i++) {
-//         newArr.push(arr[i]);
-//     }
-//     return newArr;
-// }
 const setHourly = (arr) => {
     const newArr = [];
     // погода на ближайшие 24 часа
@@ -20,99 +11,66 @@ const setHourly = (arr) => {
     }
     return newArr;
 }
-export default class FrontSide extends Component {
 
-    state = {
-        currentWeather: null, 
-        prevCity: null, 
-        weatherList: null,
-        loading: true,
-        activeButton: "hourly"
-    };
+export default function FrontSide({options, onClick}) {
 
-    updateWeather = () => {
-        const {currentCity, units, currentLang} = this.props;
-        const {lon, lat} = currentCity;
-        if (currentCity.id) {
-            getWeather(lat, lon, currentLang, units)
-            .then(weather => {
-                this.setState({
-                    currentWeather: weather,
-                    weatherList: this.state.activeButton === "hourly" ? setHourly(weather.hourly) : weather.daily,
-                    loading: false
+    const [weather, setWeather] = useState(null);
+    const [forecast, setForecast] = useState("hourly");
+    const [forecastList, setForecastList] = useState(null);
+    const [loading, setLoadig] = useState(true);
+
+    const {lang, units, currentCity, currentLocation} = options;
+
+    let city = currentCity || currentLocation;
+
+    // Выбор периода прогноза погоды
+    // Select the weather forecast period
+    const onDaily = () => {
+        const daily = weather.daily;
+        setForecastList(daily);
+        setForecast("daily");
+        document.querySelector('.scroll').scrollLeft = 0;
+    }
+
+    const onHourly = () => {
+        const hourly = setHourly(weather.hourly);
+        setForecastList(hourly);
+        setForecast("hourly")
+        document.querySelector('.scroll').scrollLeft = 0;
+    }
+
+    // Обновляем погоду при изменении параметров
+    // Updating the weather when changing parameters
+    useEffect(() => {
+        setLoadig(true)
+        if (city) {
+            const {lon, lat} = city;
+            getWeather(lat, lon, lang, units)
+                .then(weather => {
+                    setWeather(weather);
+                    setForecastList(setHourly(weather.hourly));
+                    setLoadig(false);
                 })
-            })
+                .catch(error => {
+                    console.log(error)
+                })
         }
-    }
+    }, [city, lang, units])
 
-    onDaily = () => {
-        const daily = this.state.currentWeather.daily;
-        this.setState({
-            weatherList: daily,
-            activeButton: "daily"
-        });
-        document.querySelector('.scroll').scrollLeft = 0;
-    }
-
-    onHourly = () => {
-        const hourly = setHourly(this.state.currentWeather.hourly);
-        this.setState({
-            weatherList: hourly,
-            activeButton: "hourly"
-        });
-        document.querySelector('.scroll').scrollLeft = 0;
-    }
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.currentCity.id !== prevState.prevCity) {
-            return {
-                prevCity: nextProps.currentCity.id,
-                currentWeather: null,
-                loading: true
+    return (
+        <>
+            {loading ? <Spinner/> :
+                <FrontSideView
+                    currentLang={lang}
+                    currentWeather={weather.current}
+                    currentCityName={city.name}
+                    onClick={onClick}
+                    weatherList={forecastList}
+                    activeButton={forecast}
+                    onDaily={onDaily}
+                    onHourly={onHourly}
+                />
             }
-        }
-
-        return null;
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.currentWeather) {
-            return null;
-        }
-        if (this.props.currentLang !== prevProps.currentLang) {
-            this.updateWeather();
-        }
-        this.updateWeather();
-    }
-
-    componentDidMount() {
-        this.updateWeather();
-    }
-
-    render() {
-
-        if (this.state.loading) {
-            return <Spinner/>
-        }
-
-        if (!this.state.currentWeather) {
-            return null;
-        };
-
-        const {currentLang, currentCity, onClick} = this.props;
-        const {currentWeather, weatherList, activeButton} = this.state;
-
-        return (
-            <FrontSideView
-                currentLang={currentLang}
-                currentWeather={currentWeather.current}
-                currentCityName={currentCity.name}
-                onClick={onClick}
-                weatherList={weatherList}
-                activeButton={activeButton}
-                onDaily={this.onDaily}
-                onHourly={this.onHourly}
-            />
-        );
-    }
+        </>
+    );
 } 

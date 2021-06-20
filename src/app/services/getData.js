@@ -9,7 +9,7 @@ const getResource = async (url) => {
     return await res.json();
 };
 
-const keyAPI = "fcf8724495fdc0ffd44f1c13dde3b8df";
+const keyAPI = "baa2d1fa83b6825df322b2b340a72fb9";
 
 const getWeather = async (lat, lon, currentLang, units) => {
     const res = await getResource(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${keyAPI}&lang=${currentLang}&units=${units}`);
@@ -19,11 +19,9 @@ const getCity = async (cityName) => {
     const res = await getResource(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${keyAPI}`);
     return res;
 }
-const getLocation = async (currentLang) => {
-    const res = await getResource(`http://ip-api.com/json/?lang=${currentLang}&fields=,city,lat,lon`);
+const getCityName = async (lat, lon) => {
+    const res = await getResource(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${keyAPI}`);
     return res;
 }
 
-
-
-export {getWeather, getCity, getLocation};
+export {getWeather, getCity, getCityName};

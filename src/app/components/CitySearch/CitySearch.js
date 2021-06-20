@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import CitySearchResult from './CitySearchResult';
-import {getCity} from '../services/api';
+import {getCity} from '../../services/getData';
 import './CitySearch.scss';
 
 
@@ -10,20 +10,19 @@ const CitySearch = ({addCity}) => {
     const [result, setResult] = useState([]);
 
     const onSearch = () => {
-        if (value.length > 1) {
+        if (value.length >= 2) {
             getCity(value)
-            .then((res) => {
-                if (res.length !== 0) {
-                    setResult(res);
-                } else {
-                    setResult(null)
-                }
-                
-                setValue("");
-            })
-            .catch(() => {
-                setResult([{city: "ошибка запроса"}])
-            })
+                .then((res) => {
+                    if (res.length !== 0) {
+                        setResult(res);
+                    } else {
+                        setResult(null)
+                    }
+                    setValue("");
+                })
+                .catch(() => {
+                    setResult([{city: "ошибка запроса"}])
+                })
         }
     }
 

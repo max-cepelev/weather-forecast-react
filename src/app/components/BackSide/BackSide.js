@@ -5,23 +5,19 @@ import './button.css';
 
 
 
-const BackSide = ({onClick, citiesList, currentCity, onSelect, onClickLang, onAddCity, getLocalStorage, onDelete}) => {
+export default function BackSide({options, onClick, onSelectCity, onAddCity, onDeleteCity}) {
     return (
         <div className='card-back'>
             <div>
                 {/* <button className='button-lang' onClick={onClickLang}>lang</button> */}
                 <CitiesList
-                    citiesList={citiesList}
-                    currentCity={currentCity}
-                    onSelect={onSelect}
-                    getLocalStorage={getLocalStorage}
-                    onDelete={onDelete}
+                    options={options}
+                    onSelectCity={onSelectCity}
+                    onDeleteCity={onDeleteCity}
                 />
-                {citiesList.length < 10 ? <CitySearch addCity={onAddCity}/> : <div className="search-item">Удалите город чтобы добавить новый</div>}
+                {options.citiesList.length < 10 ? <CitySearch addCity={onAddCity}/> : <div className="search-item">Удалите город чтобы добавить новый</div>}
             </div>
             <button className='button' onClick={onClick} >Назад</button>
         </div>
     );
 };
-
-export default BackSide;
