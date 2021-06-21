@@ -14,30 +14,43 @@ const setHourly = (arr) => {
 
 export default function FrontSide({options, onClick}) {
 
-    const [weather, setWeather] = useState(null);
-    const [forecast, setForecast] = useState("hourly");
-    const [forecastList, setForecastList] = useState(null);
+    const [state, setState] = useState({
+        weather: null,
+        forecast: null,
+        activeForecast: "hourly"
+    });
+
     const [loading, setLoadig] = useState(true);
 
     const {lang, units, currentCity, currentLocation} = options;
+
+    const {weather, activeForecast, forecast} = state;
 
     let city = currentCity || currentLocation;
 
     // Выбор периода прогноза погоды
     // Select the weather forecast period
-    const onDaily = () => {
-        const daily = weather.daily;
-        setForecastList(daily);
-        setForecast("daily");
+    const handleSetForecast = (forecast) => {
+        if (forecast === "hourly") {
+            setState(prevState => {
+                return {
+                    ...prevState,
+                    forecast: setHourly(weather.hourly),
+                    activeForecast: "hourly"
+                }
+            })
+        } else {
+            setState(prevState => {
+                return {
+                    ...prevState,
+                    forecast: weather.daily,
+                    activeForecast: "daily"
+                }
+            })
+        }
         document.querySelector('.scroll').scrollLeft = 0;
     }
 
-    const onHourly = () => {
-        const hourly = setHourly(weather.hourly);
-        setForecastList(hourly);
-        setForecast("hourly")
-        document.querySelector('.scroll').scrollLeft = 0;
-    }
 
     // Обновляем погоду при изменении параметров
     // Updating the weather when changing parameters
@@ -47,8 +60,13 @@ export default function FrontSide({options, onClick}) {
             const {lon, lat} = city;
             getWeather(lat, lon, lang, units)
                 .then(weather => {
-                    setWeather(weather);
-                    setForecastList(setHourly(weather.hourly));
+                    setState(prevState => {
+                        return {
+                            ...prevState,
+                            weather: weather,
+                            forecast: prevState.activeForecast === "hourly" ? setHourly(weather.hourly) : weather.daily
+                        }
+                    })
                     setLoadig(false);
                 })
                 .catch(error => {
@@ -65,10 +83,9 @@ export default function FrontSide({options, onClick}) {
                     currentWeather={weather.current}
                     currentCityName={city.name}
                     onClick={onClick}
-                    weatherList={forecastList}
-                    activeButton={forecast}
-                    onDaily={onDaily}
-                    onHourly={onHourly}
+                    forecast={forecast}
+                    activeForecast={activeForecast}
+                    handleSetForecast={handleSetForecast}
                 />
             }
         </>

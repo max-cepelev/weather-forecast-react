@@ -1,7 +1,7 @@
 .panel {
     border-radius: 8px;
     width: clamp(318px, 85vw, 450px);
-    height: 600px;
+    height: clamp(485px, 85vh, 600px);
     perspective: 800px;
     position: relative;
     &.flip &-front{

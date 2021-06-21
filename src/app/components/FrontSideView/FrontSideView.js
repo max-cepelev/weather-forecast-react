@@ -4,7 +4,7 @@ import Wind from '../Wind/Wind';
 import './FrontSide.scss';
 import optionsImage from './options.svg';
 
-const FrontSideView = ({currentLang, currentWeather, currentCityName, onClick, weatherList, activeButton, onDaily, onHourly}) => {
+const FrontSideView = ({currentLang, currentWeather, currentCityName, onClick, forecast, activeForecast, handleSetForecast}) => {
 
     const ucFirst = (str) => {
         if (!str) return str;
@@ -45,10 +45,10 @@ const FrontSideView = ({currentLang, currentWeather, currentCityName, onClick, w
                 </div>
             </div>
             <div className="card-row">
-                <div className={`card-select ${activeButton === "hourly" && "active"}`} onClick={onHourly}>По часам</div>
-                <div className={`card-select ${activeButton === "daily" && "active"}`} onClick={onDaily}>По дням</div>
+                <div className={`card-select ${activeForecast === "hourly" && "active"}`} onClick={() => handleSetForecast("hourly")}>По часам</div>
+                <div className={`card-select ${activeForecast === "daily" && "active"}`} onClick={() => handleSetForecast("daily")}>По дням</div>
             </div>
-            <WeatherList weatherList={weatherList} getNewDate={getNewDate}/>
+            <WeatherList weatherList={forecast} getNewDate={getNewDate}/>
             <div className='card-row card-footer'>
                 <h1 className='card-city flexfont24'>{currentCityName}</h1>
                 <button className='card-options' onClick={onClick}>

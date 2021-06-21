@@ -12,26 +12,20 @@ html {
 }
 
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #F3F2ED;
   font-family: 'Montserrat Alternates', sans-serif;
   color: #fff;
-  height: 100%;
-  margin: 0;
+  margin: auto;
   padding: 0;
+  height: 100vh;
+  overflow: hidden;
   text-align: center;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   -webkit-tap-highlight-color: transparent;
   user-select: none;;
-}
-
-#root {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
 }
 
 .flexfont24 {
