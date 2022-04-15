@@ -1,65 +1,64 @@
-
 .list {
-    color: #333;
-    text-align: left;
-    list-style-type: none;
-    padding: 0;
-    flex: 1;
-    margin: 0;
-    &-item {
-        display: flex;
-        justify-content: space-between;
-        padding-left: 30px;
-        cursor: pointer;
-        position: relative;
-        &.is-selected {
-            color: #5A56FD;
-            &:after {
-                background: url('checkmark.svg');
-                background-size: 100%;
-                content: '';
-                display: block;
-                height: 15px;
-                left: 7px;
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 15px;
-            }
-        }
-        p {
-            display: block;
-            width: 80%;
-            margin: 5px 0;
-        }
+  color: #333;
+  text-align: left;
+  list-style-type: none;
+  padding: 0;
+  flex: 1;
+  margin: 0;
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+    cursor: pointer;
+    position: relative;
+    &.is-selected {
+      color: #5a56fd;
+      &:after {
+        background: url('checkmark.svg');
+        background-size: 100%;
+        content: '';
+        display: block;
+        height: 15px;
+        left: 7px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 15px;
+      }
     }
-    &-location {
-        padding-left: 30px;
-        cursor: pointer;
-        position: relative;
-        &.is-selected {
-            color: #5A56FD;
-        }
-        &:after {
-            background: url('location.svg');
-            background-size: 100%;
-            content: '';
-            display: block;
-            height: 25px;
-            left: 0px;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 25px;
-        }
+    p {
+      display: block;
+      width: 80%;
+      margin: 5px 0;
     }
-    &-delete {
-        width: 20%;
-        display: flex;
-        justify-content: flex-end;
-        padding-right: 10px;
-        img {
-            width: 30px;
-        }
+  }
+  &-location {
+    padding-left: 30px;
+    cursor: pointer;
+    position: relative;
+    &.is-selected {
+      color: #5a56fd;
     }
+    &:after {
+      background: url('location.svg');
+      background-size: 100%;
+      content: '';
+      display: block;
+      height: 25px;
+      left: 0px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 25px;
+    }
+  }
+  &-delete {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    img {
+      width: 30px;
+    }
+  }
 }

@@ -1,37 +1,40 @@
-
 html {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   -webkit-box-sizing: inherit;
   -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #F3F2ED;
+  background-color: #f3f2ed;
   font-family: 'Montserrat Alternates', sans-serif;
+  font-weight: bold;
   color: #fff;
-  margin: auto;
+  margin: 0;
   padding: 0;
   height: 100vh;
-  overflow: hidden;
   text-align: center;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   -webkit-tap-highlight-color: transparent;
-  user-select: none;;
+  user-select: none;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .flexfont24 {
-  font-size: clamp(19px, 5vw , 24px);
+  font-size: clamp(19px, 5vw, 24px);
 }
 
 .flexfont16 {
-  font-size: clamp(13px, 3.3vw , 16px);
+  font-size: clamp(13px, 3.3vw, 16px);
 }

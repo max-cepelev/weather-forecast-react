@@ -1,170 +1,237 @@
 .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(
+    160deg,
+    rgba(136, 209, 252, 1) 0%,
+    rgba(84, 69, 253, 1) 100%
+  );
+  border-radius: 8px;
+  height: 100%;
+  padding: 15px 25px;
+  &-day {
+    text-align: left;
+  }
+  &-line {
+    border-bottom: 3.5px solid #fff;
+    width: 100%;
+  }
+  &-temperature {
+    margin-top: 3vh;
+    font-size: 80px;
+    text-align: left;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+  }
+  &-row {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(160deg, rgba(136,209,252,1) 0%, rgba(84,69,253,1) 100%);
+    width: 100%;
+  }
+  &-footer {
+    border-top: 3.5px solid #fff;
+    padding-top: 12px;
+  }
+  &-city {
+    text-align: left;
+    margin: 0;
+  }
+  &-options {
+    background: none;
+    border: none;
+    outline: none;
+  }
+  &-weather {
+    font-size: 26px;
+    margin: 0 auto;
+  }
+  &-back {
+    background: #fff;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    padding: 15px 25px;
-    &-day {
-        text-align: left;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+  }
+  &-select {
+    width: 50%;
+    cursor: pointer;
+    height: 27px;
+    align-self: center;
+    margin: 0 15px;
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      height: 2px;
+      width: 0;
+      background-color: #ffffff;
+      bottom: 0px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: all 0.5s;
     }
-    &-line {
-        border-bottom: 3.5px solid #fff;
-        width: 100%;
+    &.active {
+      &::after {
+        width: 120px;
+      }
     }
-    &-temperature {
-        margin-top: 3vh;
-        font-size: 80px;
-        text-align: left;
-        display: flex;
-        align-items: center;
+  }
+  &-conditions {
+    justify-content: center;
+    img {
+      height: 30px;
     }
-    &-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
+    span {
+      margin: 0 7px;
     }
-    &-footer {
-        border-top: 3.5px solid #fff;
-        padding-top: 12px;
-    }
-    &-city {
-        text-align: left;
-        margin: 0;
-    }
-    &-options {
-        background: none;
-        border: none;
-        outline: none;
-    }
-    &-weather {
-        font-size: 26px;
-        margin: 0 auto;
-    }
-    &-back {
-        background: #fff;
-        border-radius: 8px;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        justify-content: space-between;
-        padding: 20px;
-        width: 100%;
-    }
-    &-select {
-        width: 50%;
-        cursor: pointer;
-        height: 27px;
-        align-self: center;
-        margin: 0 15px;
-        position: relative;
-        &::after {
-            content: "";
-            position: absolute;
-            height: 2px;
-            width: 0;
-            background-color: #FFFFFF;
-            bottom: 0px;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: all .5s;
-        }
-        &.active {
-            &::after {
-                width: 120px;
-            }
-        }
-    }
-    &-conditions {
-        justify-content: center;
-        img {
-            height: 30px;
-        }
-        span {
-            margin: 0 7px;
-        }
-    }
-    
-    .scroll {
-        display: grid;
-        grid-template: 1fr / repeat(24, 20%);
-        width: 100%;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        scroll-snap-type: x mandatory;
-        scroll-snap-stop: always;
-        &::-webkit-scrollbar {
-            height: 0;
-        }
-    }
+  }
 
-    &.is-01d {
-        background: linear-gradient(160deg, rgba(247,183,51,1) 0%, rgba(252,74,26,1) 100%);
-    }
-    &.is-01n {
-        background: linear-gradient(18deg, rgba(182,136,252,1) 0%, rgba(73,43,176,1) 100%); 
-    }
-    /* is-rain */
-    &.is-10d { 
-        background: linear-gradient(18deg, rgba(0,110,213,1) 0%, rgba(162,171,177,1) 74%); 
-    }
-    &.is-10n { 
-        background: linear-gradient(18deg, rgba(0,110,213,1) 0%, rgba(162,171,177,1) 74%); 
-    }
-    /* is-sleet */
-    &.is-09d {
-        background: linear-gradient(18deg, rgba(0,110,213,1) 0%, rgba(162,171,177,1) 74%); 
-    }
-    &.is-09n {
-        background: linear-gradient(18deg, rgba(0,110,213,1) 0%, rgba(162,171,177,1) 74%); 
-    }
-    /* is-broken */
-    &.is-04d {
-        background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
-    }
-    &.is-04n {
-        background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
-    }
-    /* is-thunderstorm */
-    &.is-11d {
-        background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
-    }
-    &.is-11n {
-        background: linear-gradient(12deg, rgba(26,88,146,1) 0%, rgba(130,136,139,1) 74%); 
-    }
-    /* is-snow */
-    &.is-13d {
-        background: linear-gradient(18deg, rgba(0,175,245,1) 0%, rgba(0,223,247,1) 74%); 
-    }
-    &.is-13n {
-        background: linear-gradient(18deg, rgba(0,175,245,1) 0%, rgba(0,223,247,1) 74%); 
-    }
-    /* is-fog */
-    &.is-50d {
-        background: linear-gradient(18deg, rgba(148,190,195,1) 0%, rgba(135,192,228,1) 74%); 
-    }
-    &.is-50n {
-        background: linear-gradient(18deg, rgba(148,190,195,1) 0%, rgba(135,192,228,1) 74%); 
-    }
-    /* is-cloudy */
-    &.is-03d {
-        background: linear-gradient(18deg, rgba(63,174,187,1) 0%, rgba(0,157,255,1) 100%); 
-    }
-    &.is-03n {
-        background: linear-gradient(18deg, rgba(63,174,187,1) 0%, rgba(0,157,255,1) 100%); 
-    }
-    /* is-partly-cloudy-day */
-    &.is-02d {
-        background: linear-gradient(18deg, rgba(0,190,254,1) 17%, rgba(255,190,0,1) 100%); 
-    }
-    /* is-partly-cloudy-night */
-    &.is-02n {
-        background: linear-gradient(18deg, rgba(121,0,254,1) 17%, rgba(136,203,251,1) 100%); 
-    }
-    &.is-default {
-        background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%); 
-    }
+  &.is-01d {
+    background: linear-gradient(
+      160deg,
+      rgba(247, 183, 51, 1) 0%,
+      rgba(252, 74, 26, 1) 100%
+    );
+  }
+  &.is-01n {
+    background: linear-gradient(
+      18deg,
+      rgba(182, 136, 252, 1) 0%,
+      rgba(73, 43, 176, 1) 100%
+    );
+  }
+  /* is-rain */
+  &.is-10d {
+    background: linear-gradient(
+      18deg,
+      rgba(0, 110, 213, 1) 0%,
+      rgba(162, 171, 177, 1) 74%
+    );
+  }
+  &.is-10n {
+    background: linear-gradient(
+      18deg,
+      rgba(0, 110, 213, 1) 0%,
+      rgba(162, 171, 177, 1) 74%
+    );
+  }
+  /* is-sleet */
+  &.is-09d {
+    background: linear-gradient(
+      18deg,
+      rgba(0, 110, 213, 1) 0%,
+      rgba(162, 171, 177, 1) 74%
+    );
+  }
+  &.is-09n {
+    background: linear-gradient(
+      18deg,
+      rgba(0, 110, 213, 1) 0%,
+      rgba(162, 171, 177, 1) 74%
+    );
+  }
+  /* is-broken */
+  &.is-04d {
+    background: linear-gradient(
+      12deg,
+      rgba(26, 88, 146, 1) 0%,
+      rgba(130, 136, 139, 1) 74%
+    );
+  }
+  &.is-04n {
+    background: linear-gradient(
+      12deg,
+      rgba(26, 88, 146, 1) 0%,
+      rgba(130, 136, 139, 1) 74%
+    );
+  }
+  /* is-thunderstorm */
+  &.is-11d {
+    background: linear-gradient(
+      12deg,
+      rgba(26, 88, 146, 1) 0%,
+      rgba(130, 136, 139, 1) 74%
+    );
+  }
+  &.is-11n {
+    background: linear-gradient(
+      12deg,
+      rgba(26, 88, 146, 1) 0%,
+      rgba(130, 136, 139, 1) 74%
+    );
+  }
+  /* is-snow */
+  &.is-13d {
+    background: linear-gradient(
+      18deg,
+      rgba(0, 175, 245, 1) 0%,
+      rgba(0, 223, 247, 1) 74%
+    );
+  }
+  &.is-13n {
+    background: linear-gradient(
+      18deg,
+      rgba(0, 175, 245, 1) 0%,
+      rgba(0, 223, 247, 1) 74%
+    );
+  }
+  /* is-fog */
+  &.is-50d {
+    background: linear-gradient(
+      18deg,
+      rgba(148, 190, 195, 1) 0%,
+      rgba(135, 192, 228, 1) 74%
+    );
+  }
+  &.is-50n {
+    background: linear-gradient(
+      18deg,
+      rgba(148, 190, 195, 1) 0%,
+      rgba(135, 192, 228, 1) 74%
+    );
+  }
+  /* is-cloudy */
+  &.is-03d {
+    background: linear-gradient(
+      18deg,
+      rgba(63, 174, 187, 1) 0%,
+      rgba(0, 157, 255, 1) 100%
+    );
+  }
+  &.is-03n {
+    background: linear-gradient(
+      18deg,
+      rgba(63, 174, 187, 1) 0%,
+      rgba(0, 157, 255, 1) 100%
+    );
+  }
+  /* is-partly-cloudy-day */
+  &.is-02d {
+    background: linear-gradient(
+      18deg,
+      rgba(0, 190, 254, 1) 17%,
+      rgba(255, 190, 0, 1) 100%
+    );
+  }
+  /* is-partly-cloudy-night */
+  &.is-02n {
+    background: linear-gradient(
+      18deg,
+      rgba(121, 0, 254, 1) 17%,
+      rgba(136, 203, 251, 1) 100%
+    );
+  }
+  &.is-default {
+    background: linear-gradient(
+      0deg,
+      rgba(34, 193, 195, 1) 0%,
+      rgba(253, 187, 45, 1) 100%
+    );
+  }
 }

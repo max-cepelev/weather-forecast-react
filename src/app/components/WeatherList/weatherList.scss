@@ -1,12 +1,28 @@
+.scroll {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-snap-stop: always;
+  scroll-behavior: smooth;
+  flex-wrap: nowrap;
+  column-gap: clamp(8px, 3vw, 24px);
+  &::-webkit-scrollbar {
+    height: 0;
+  }
+}
+
 .weather-list {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 0;
-    height: clamp(110px, 19vh, 130px);
-    scroll-snap-align: start;
-    p {
-        margin: 0;
-    }
+  display: flex;
+  min-width: 60px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  height: clamp(110px, 19vh, 130px);
+  scroll-snap-align: start;
+  p {
+    margin: 0;
+  }
 }
